@@ -1,0 +1,281 @@
+#+STARTUP: indent children
+
+* Emacs-wsl
+
+This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL
+in Windows 10. Emacs can either be run with a graphical display or directly in
+the terminal.
+
+This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
+
+* Contents                                                         :TOC_1_gh:
+:PROPERTIES:
+:VISIBILITY: all
+:END:
+- [[#emacs-wsl][Emacs-wsl]]
+- [[#enable-the-windows-subsystem-for-linux][Enable the Windows Subsystem for Linux]]
+- [[#install-the-linux-distribution][Install the Linux distribution]]
+- [[#configure][Configure]]
+- [[#install-emacs][Install Emacs]]
+- [[#run-emacs-in-terminal][Run Emacs in terminal]]
+- [[#run-emacs-in-graphical-display][Run Emacs in graphical display]]
+- [[#faq][FAQ]]
+
+* Enable the Windows Subsystem for Linux
+
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+Open PowerShell as Administrator and run the following to enable the feature:
+
+#+BEGIN_SRC text
+  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+#+END_SRC
+
+Restart your computer (you should be prompted to do so).
+
+This can also be done with:
+
+- Open Control Panel
+- Programs and Features
+- Turn Windows Feature on or off
+- Check Windows Subsystem for Linux
+
+* Install the Linux distribution
+
+[[https://docs.microsoft.com/en-us/windows/wsl/install-win10#install-your-linux-distribution-of-choice][install-your-linux-distribution-of-choice]]
+
+You can install the linux distribution:
+
+- [[https://docs.microsoft.com/en-us/windows/wsl/install-win10#windows-10-fall-creators-update-and-later-install-from-the-microsoft-store][from the Microsoft store]]
+- [[https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distros-via-the-command-line][from the command line]] (used in this guide)
+- [[https://docs.microsoft.com/en-us/windows/wsl/install-on-server#download-a-linux-distro][manually (download)]]
+
+** Installing from command line
+
+Installing Ubuntu 18.04 from command line with PowerShell.
+
+#+BEGIN_SRC text
+  curl.exe -L -o ubuntu-1804.appx https://aka.ms/wsl-ubuntu-1804
+  Add-AppxPackage .\ubuntu-1804.appx
+#+END_SRC
+
+* Configure
+
+Start the wsl and configure it.
+
+** Update
+
+Make sure everything is up to date:
+
+#+BEGIN_SRC shell
+  sudo apt update
+  sudo apt upgrade
+#+END_SRC
+
+** User
+
+Instead of using root user it's better to add an user.
+
+*** Add user
+
+#+BEGIN_SRC shell
+  sudo adduser <username>
+#+END_SRC
+
+*** Change default user
+
+Change the default user which is used when starting the wsl.
+
+Open cmd.exe and run:
+
+#+BEGIN_SRC shell
+  ubuntu config --default-user <username>
+#+END_SRC
+
+Restart wsl.
+
+*** Make it a sudo user
+
+Make that user be a sudo user:
+
+#+BEGIN_SRC shell
+  # change to root
+  sudo su -
+  sudo usermod -a -G sudo <username>
+  exit
+#+END_SRC
+
+** Ssh key
+
+Generate a new ED25519 SSH key pair:
+
+#+BEGIN_SRC shell
+  ssh-keygen -t ed25519 -C "email@example.com"
+#+END_SRC
+
+A dialog will ask you to:
+
+- input a file path: use the suggested path by pressing ~Enter~
+- enter a password: enter your password
+
+To copy the generated ssh key into the clipboard use:
+
+#+BEGIN_SRC shell
+  clip.exe < ~/.ssh/id_ed25519.pub
+#+END_SRC
+
+** Language
+
+This might be needed:
+
+#+BEGIN_SRC shell
+  sudo update-locale LANG=en_US.UTF8
+#+END_SRC
+
+** Mount drives
+
+You can mount network drives:
+
+#+BEGIN_SRC shell
+  # mount a mapped drive
+  sudo mkdir /mnt/g
+  sudo mount -t drvfs G: /mnt/g
+  # unmout
+  sudo umount /mnt/g
+  # mount network location
+  sudo mount -t drvfs '\\server\share' /mnt/share
+#+END_SRC
+
+All drives are found under ~/mnt~:
+
+#+BEGIN_SRC shell
+  cd /mnt
+  ls
+#+END_SRC
+
+** OPTIONAL Zsh
+
+Use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-my-zsh]]:
+
+#+BEGIN_SRC shell
+  sudo apt install zsh
+  chsh -s $(which zsh)
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#+END_SRC
+
+* Install Emacs
+
+This installs all dependencies for Emacs and then installs emacs 26.3:
+
+#+BEGIN_SRC shell
+  ## install dependencies
+
+  sudo apt install -y build-essential texinfo libx11-dev libxpm-dev \
+       libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev \
+       libncurses-dev gnutls-dev libgtk-3-dev libgnutls28-dev
+
+  # some more from a stackoverflow, eww was not working before
+
+  sudo apt install -y autoconf automake libtool xorg-dev libncurses5-dev \
+      libdbus-1-dev libm17n-dev librsvg2-dev libotf-dev libxml2-dev \
+      libmagickwand-dev libc6-dev libtiff5-dev xaw3dg-dev \
+      zlib1g-dev libice-dev libsm-dev libxext-dev libxi-dev libxmu-dev \
+      libxmuu-dev libxrandr-dev libxt-dev libxtst-dev libxv-dev
+
+  ## download and install
+
+  cd ~
+  wget https://ftp.gnu.org/pub/gnu/emacs/emacs-26.3.tar.gz
+  tar -xzvf emacs-26.3.tar.gz
+  cd emacs-26.3
+  ./configure
+  make
+  sudo make install
+
+  cd ~
+  rm -rf ~/emacs-26.3
+  rm ~/emacs-26.3.tar.gz
+#+END_SRC
+
+See[[file:emacs-27.sh][ emacs-27.sh]] to install Emacs 27 instead.
+
+* Run Emacs in terminal
+
+Run Emacs with ~emacs -nw~ to see if it is working. You can also see what path
+it is using as home with ~C-h user-emacs-directory~. That's where you can place
+your init.el etc.
+
+You can
+
+* Run Emacs in graphical display
+
+To be able to run Emacs with a graphical display you need to install a linux
+desktop and a Windows x server.
+
+** Install Windows x server
+
+An X server lets you access a Linux application or desktop environment’s graphic
+user interface (GUI). Using open source VcXsrv:
+
+- Download it from [[https://sourceforge.net/projects/vcxsrv/]]
+- Install it by executing the exe
+
+** Install the linux desktop
+
+Using lxde (lightweight one):
+
+#+BEGIN_SRC shell
+  sudo apt install lxde
+#+END_SRC
+
+** Run Emacs
+
+*** Run the xserver
+
+Start XLaunch and use the defaults:
+
+- Multiple Windows, Display number -1 (or 0 if not working), Next
+- Start no client, Next
+- Leave checkboxes, Next
+- Finish
+
+*** Run emacs in wsl
+
+Open wsl and run (this also changes the keyboard layout used to US, remove if
+yout don't want this. Then it should use your default keyboard layout):
+
+#+BEGIN_SRC shell
+  export DISPLAY=:0
+  export LIBGL_ALWAYS_INDIRECT=1
+  # OPTIONAL Set the keyboard layout to US
+  setxkbmap -layout us
+  setsid emacs
+  exit
+#+END_SRC
+
+This will open emacs in a new window. By using setsid this is done in a new
+session and therefore the wsl can be closed after with exit. You can just change
+it to ~emacs~ and remove ~exit~ if you want.
+
+To not have to type this over and over make an alias in "~/.bashrc" or if you
+installed zsh in "~/.zshrc":
+
+#+BEGIN_SRC shell
+  alias eme='
+  export DISPLAY=:0.0
+  export LIBGL_ALWAYS_INDIRECT=1
+  setxkbmap -layout us
+  setsid emacs
+  exit
+  '
+#+END_SRC
+
+Now you can fire wsl up and run ~eme~.
+
+* FAQ
+
+** Where is the root folder located?
+
+It's in ~%LOCALAPPDATA%\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs~
+
+See [[https://superuser.com/a/1280916]].
