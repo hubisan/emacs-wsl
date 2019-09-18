@@ -303,10 +303,7 @@ See [[https://superuser.com/a/1280916]].
 
 To start WSL from Windows Explorer just type ~wsl~ into the location input box:
 
-#+ATTR_HTML: width="100px"
-#+begin_pepe
 #+caption: WSL from windows explorer
 [[./img/wsl-from-windows-explorer.png]]
-#+end_pepe
 
 The drive has to be mounted else it will not work.
