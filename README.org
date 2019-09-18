@@ -8,6 +8,9 @@ the terminal.
 
 This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
 
+#+caption: Graphical Emacs in Windows 10 with WSL
+[[./img/emacs-wsl.png]]
+
 * Contents                                                         :TOC_1_gh:
 :PROPERTIES:
 :VISIBILITY: all
@@ -19,6 +22,7 @@ This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
 - [[#install-emacs][Install Emacs]]
 - [[#run-emacs-in-terminal][Run Emacs in terminal]]
 - [[#run-emacs-in-graphical-display][Run Emacs in graphical display]]
+- [[#remarks][Remarks]]
 - [[#faq][FAQ]]
 
 * Enable the Windows Subsystem for Linux
@@ -274,10 +278,32 @@ installed zsh in "~/.zshrc":
 
 Now you can fire wsl up and run ~eme~.
 
+* Remarks
+
+** Accessing Linux files from Windows
+
+Don't touch your Linux files from Windows. Creating and changing Linux files
+from Windows resulted in losing files or corrupting data.
+
+This also means that if you want to for instance copy a file into your subsystem
+this has to be done from inside the wsl.
+
+Looks like this is getting if one has Windows 10 Version 1903 or newer:
+
+https://devblogs.microsoft.com/commandline/whats-new-for-wsl-in-windows-10-version-1903/
+
 * FAQ
 
 ** Where is the root folder located?
 
 It's in ~%LOCALAPPDATA%\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs~
-
 See [[https://superuser.com/a/1280916]].
+
+** How start WSL from Windows Explorer in the current folder?
+
+To start WSL from Windows Explorer just type ~wsl~ into the location input box:
+
+#+caption: WSL from windows explorer
+[[./img/wsl-from-windows-explorer.png]]
+
+The drive has to be mounted else it will not work.
