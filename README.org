@@ -153,7 +153,7 @@ All drives are found under ~/mnt~:
   ls
 #+END_SRC
 
-** OPTIONAL Zsh
+** [OPTIONAL] Zsh
 
 Use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-my-zsh]]:
 
@@ -162,6 +162,8 @@ Use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-m
   chsh -s $(which zsh)
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #+END_SRC
+
+Restart wsl.
 
 * Install Emacs
 
