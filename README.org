@@ -1,6 +1,6 @@
 #+STARTUP: indent children
 
-* Emacs-wsl
+* Emacs-wsl                                                        :noexport:
 
 This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL
 in Windows 10. Emacs can either be run with a graphical display or directly in
@@ -15,7 +15,6 @@ This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
 :PROPERTIES:
 :VISIBILITY: all
 :END:
-- [[#emacs-wsl][Emacs-wsl]]
 - [[#enable-the-windows-subsystem-for-linux][Enable the Windows Subsystem for Linux]]
 - [[#install-the-linux-distribution][Install the Linux distribution]]
 - [[#configure][Configure]]
@@ -27,7 +26,9 @@ This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
 
 * Enable the Windows Subsystem for Linux
 
+#+begin_quote
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
+#+end_quote
 
 Open PowerShell as Administrator and run the following to enable the feature:
 
@@ -46,7 +47,9 @@ This can also be done with:
 
 * Install the Linux distribution
 
+#+begin_quote
 [[https://docs.microsoft.com/en-us/windows/wsl/install-win10#install-your-linux-distribution-of-choice][install-your-linux-distribution-of-choice]]
+#+end_quote
 
 You can install the linux distribution:
 
@@ -288,9 +291,9 @@ from Windows resulted in losing files or corrupting data.
 This also means that if you want to for instance copy a file into your subsystem
 this has to be done from inside the wsl.
 
-Looks like this is getting if one has Windows 10 Version 1903 or newer:
+Looks like this is getting better if one has Windows 10 Version 1903 or newer:
 
-https://devblogs.microsoft.com/commandline/whats-new-for-wsl-in-windows-10-version-1903/
+[[https://devblogs.microsoft.com/commandline/whats-new-for-wsl-in-windows-10-version-1903/][whats-new-for-wsl-in-windows-10-version-1903]]
 
 * FAQ
 
