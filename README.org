@@ -222,8 +222,8 @@ All mounted drives are found under ~/mnt~:
 
 To do so the fstab file needs to be configured.
 
-For instance to mount H: add this to "/etc/fstab" (the directory has to exist to
-make this work, so in this case "sudo mkdir /mnt/h" is needed beforehand):
+For instance to mount ~H:~ add this to "/etc/fstab" (the directory has to exist to
+make this work, so in this case ~sudo mkdir /mnt/h~ is needed beforehand):
 
 #+BEGIN_SRC text
   H: /mnt/h drvfs defaults 0 0
@@ -362,7 +362,9 @@ this has to be done from inside the WSL.
 
 Looks like this is getting better if one has Windows 10 Version 1903 or newer:
 
+#+begin_quote
 [[https://devblogs.microsoft.com/commandline/whats-new-for-wsl-in-windows-10-version-1903/][whats-new-for-wsl-in-windows-10-version-1903]]
+#+end_quote
 
 * FAQ
 
