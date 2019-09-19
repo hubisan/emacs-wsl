@@ -17,7 +17,7 @@ This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
 :END:
 - [[#enable-the-windows-subsystem-for-linux][Enable the Windows Subsystem for Linux]]
 - [[#install-the-linux-distribution][Install the Linux distribution]]
-- [[#configure][Configure]]
+- [[#configure-wsl][Configure WSL]]
 - [[#install-emacs][Install Emacs]]
 - [[#run-emacs-in-terminal][Run Emacs in terminal]]
 - [[#run-emacs-in-graphical-display][Run Emacs in graphical display]]
@@ -66,9 +66,9 @@ Installing Ubuntu 18.04 from command line with PowerShell.
   Add-AppxPackage .\ubuntu-1804.appx
 #+END_SRC
 
-* Configure
+* Configure WSL
 
-Start the wsl and configure it.
+Start the WSL and configure it.
 
 ** Update
 
@@ -78,6 +78,62 @@ Make sure everything is up to date:
   sudo apt update
   sudo apt upgrade
 #+END_SRC
+
+** wsl.conf
+
+WIth Build 17093 and later [[https://docs.microsoft.com/en-us/windows/wsl/wsl-config#set-wsl-launch-settings][certain functionality]] in WSL can be configured inside
+the file "/etc/wsl.conf". The default is as follows:
+
+#+BEGIN_SRC text
+  # Enable extra metadata options by default.
+  [automount]
+  enabled = true
+  mountFsTab = true
+  root = /mnt/
+  options = ""
+
+  # Enable DNS  even though these are turned on by default, we’ll specify here just to be explicit.
+  [network]
+  generateHosts = true
+  generateResolvConf = true
+
+  [interop]
+  enabled = true
+  appendWindowsPath = true
+#+END_SRC
+
+*** [automount]
+
+- enabled :: true causes fixed drives (i.e C:/ or D:/) to be automatically
+     mounted with DrvFs under /mnt. false means drives won’t be mounted
+     automatically, but you could still mount them manually or via fstab.
+- mountFsTab :: true sets /etc/fstab to be processed on WSL start. /etc/fstab is
+     a file where you can declare other filesystems, like an SMB share. Thus,
+     you can mount these filesystems automatically in WSL on start up.
+- root :: Sets the directory where fixed drives will be automatically mounted.
+     For example, if you have a directory in WSL at /windir/ and you specify
+     that as the root, you would expect to see your fixed drives mounted at
+     /windir/c
+- options :: This value is appended to the default DrvFs mount options string.
+     Only DrvFs-specific options can be specified. Options that the mount binary
+     would normally parse into a flag are not supported. If you want to
+     explicitly specify those options, you must include every drive for which
+     you want to do so in /etc/fstab.
+
+*** [network]
+
+- generateHosts :: true sets WSL to generate /etc/hosts. The hosts file contains
+     a static map of hostnames corresponding IP address.
+- generateResolvConf :: true set WSL to generate /etc/resolv.conf. The
+     resolv.conf contains a DNS list that are capable of resolving a given
+     hostname to its IP address.
+
+*** [interop]
+
+- enabled :: Setting this key will determine whether WSL will support launching
+     Windows processes.
+- appendWindowsPath :: Setting this key will determine whether WSL will add
+     Windows path elements to the $PATH environment variable.
 
 ** User
 
@@ -91,7 +147,7 @@ Instead of using root user it's better to add an user.
 
 *** Change default user
 
-Change the default user which is used when starting the wsl.
+Change the default user which is used when starting the WSL.
 
 Open cmd.exe and run:
 
@@ -99,7 +155,7 @@ Open cmd.exe and run:
   ubuntu config --default-user <username>
 #+END_SRC
 
-Restart wsl.
+Restart WSL.
 
 *** Make it a sudo user
 
@@ -141,7 +197,9 @@ This might be needed:
 
 ** Mount drives
 
-You can mount network drives:
+*** Temporarily
+
+You can mount network drives temporarily with:
 
 #+BEGIN_SRC shell
   # mount a mapped drive
@@ -153,16 +211,27 @@ You can mount network drives:
   sudo mount -t drvfs '\\server\share' /mnt/share
 #+END_SRC
 
-All drives are found under ~/mnt~:
+All mounted drives are found under ~/mnt~:
 
 #+BEGIN_SRC shell
   cd /mnt
   ls
 #+END_SRC
 
-** [OPTIONAL] Zsh
+*** Automatically
 
-Use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-my-zsh]]:
+To do so the fstab file needs to be configured.
+
+For instance to mount H: add this to "/etc/fstab" (the directory has to exist to
+make this work, so in this case "sudo mkdir /mnt/h" is needed beforehand):
+
+#+BEGIN_SRC text
+  H: /mnt/h drvfs defaults 0 0
+#+END_SRC
+
+** Zsh
+
+If you want to use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-my-zsh]]:
 
 #+BEGIN_SRC shell
   sudo apt install zsh
@@ -170,7 +239,7 @@ Use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-m
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #+END_SRC
 
-Restart wsl.
+Restart WSL.
 
 * Install Emacs
 
@@ -248,9 +317,9 @@ Start XLaunch and use the defaults:
 - Leave checkboxes, Next
 - Finish
 
-*** Run emacs in wsl
+*** Run emacs in WSL
 
-Open wsl and run (this also changes the keyboard layout used to US, remove if
+Open WSL and run (this also changes the keyboard layout used to US, remove if
 yout don't want this. Then it should use your default keyboard layout):
 
 #+BEGIN_SRC shell
@@ -263,7 +332,7 @@ yout don't want this. Then it should use your default keyboard layout):
 #+END_SRC
 
 This will open emacs in a new window. By using setsid this is done in a new
-session and therefore the wsl can be closed after with exit. You can just change
+session and therefore the WSL can be closed after with exit. You can just change
 it to ~emacs~ and remove ~exit~ if you want.
 
 To not have to type this over and over make an alias in "~/.bashrc" or if you
@@ -289,7 +358,7 @@ Don't touch your Linux files from Windows. Creating and changing Linux files
 from Windows resulted in losing files or corrupting data.
 
 This also means that if you want to for instance copy a file into your subsystem
-this has to be done from inside the wsl.
+this has to be done from inside the WSL.
 
 Looks like this is getting better if one has Windows 10 Version 1903 or newer:
 
@@ -310,3 +379,7 @@ To start WSL from Windows Explorer just type ~wsl~ into the location input box:
 [[./img/wsl-from-windows-explorer.png]]
 
 The drive has to be mounted else it will not work.
+
+** What ways are there to run WSL?
+
+See [[https://docs.microsoft.com/en-us/windows/wsl/wsl-config#ways-to-run-wsl]].
