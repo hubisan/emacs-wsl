@@ -310,12 +310,26 @@ Using lxde (lightweight one):
 
 *** Run the xserver
 
+**** With XLaunch (GUI)
+
 Start XLaunch and use the defaults:
 
 - Multiple Windows, Display number -1 (or 0 if not working), Next
 - Start no client, Next
 - Leave checkboxes, Next
 - Finish
+
+**** Shortcut using command line
+
+Just make a shortcut to vcxsrv.exe in the installation folder and then changes
+its target to:
+
+~"C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl~
+
+You can put this link into the startup folder to start in when booting. And
+stick it to the task bar to launch it from there.
+
+Taken from https://superuser.com/a/1372940.
 
 *** Run emacs in WSL
 
