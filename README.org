@@ -280,7 +280,7 @@ See[[file:emacs-27.sh][ emacs-27.sh]] to install Emacs 27 instead.
 * Run Emacs in terminal
 
 Run Emacs with ~emacs -nw~ to see if it is working. You can also see what path
-it is using as home with ~C-h user-emacs-directory~. That's where you can place
+it is using as home with ~C-h v user-emacs-directory~. That's where you can place
 your init.el etc.
 
 You can
