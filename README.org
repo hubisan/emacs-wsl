@@ -81,8 +81,8 @@ Make sure everything is up to date:
 
 ** wsl.conf
 
-WIth Build 17093 and later [[https://docs.microsoft.com/en-us/windows/wsl/wsl-config#set-wsl-launch-settings][certain functionality]] in WSL can be configured inside
-the file "/etc/wsl.conf". The default is as follows:
+With Windows 10 Build 17093 and later [[https://docs.microsoft.com/en-us/windows/wsl/wsl-config#set-wsl-launch-settings][certain functionality]] in WSL can be
+configured inside the file "/etc/wsl.conf". The default is as follows:
 
 #+BEGIN_SRC text
   # Enable extra metadata options by default.
@@ -243,7 +243,7 @@ Restart WSL.
 
 * Install Emacs
 
-This installs all dependencies for Emacs and then installs emacs 26.3:
+This installs all dependencies for Emacs and then installs Emacs 26.3:
 
 #+BEGIN_SRC shell
   ## install dependencies
@@ -282,8 +282,6 @@ See[[file:emacs-27.sh][ emacs-27.sh]] to install Emacs 27 instead.
 Run Emacs with ~emacs -nw~ to see if it is working. You can also see what path
 it is using as home with ~C-h v user-emacs-directory~. That's where you can place
 your init.el etc.
-
-You can
 
 * Run Emacs in graphical display
 
@@ -331,7 +329,7 @@ stick it to the task bar to launch it from there.
 
 Taken from https://superuser.com/a/1372940.
 
-*** Run emacs in WSL
+*** Run Emacs from WSL
 
 Open WSL and run (this also changes the keyboard layout used to US, remove if
 yout don't want this. Then it should use your default keyboard layout):
@@ -345,7 +343,7 @@ yout don't want this. Then it should use your default keyboard layout):
   exit
 #+END_SRC
 
-This will open emacs in a new window. By using setsid this is done in a new
+This will open Emacs in a new window. By using setsid this is done in a new
 session and therefore the WSL can be closed after with exit. You can just change
 it to ~emacs~ and remove ~exit~ if you want.
 
@@ -364,12 +362,25 @@ installed zsh in "~/.zshrc":
 
 Now you can fire wsl up and run ~eme~.
 
+*** Start distribution & run Emacs in there
+
+You can of course also run the distribution (after running the xserver) and then
+run Emacs in there. To start the disttribution (in this case lxde).
+
+#+BEGIN_SRC shell
+  export DISPLAY=:0
+  export LIBGL_ALWAYS_INDIRECT=1
+  # OPTIONAL Set the keyboard layout to US
+  setxkbmap -layout us
+  startlxde
+#+END_SRC
+
 * Remarks
 
 ** Accessing Linux files from Windows
 
 Don't touch your Linux files from Windows. Creating and changing Linux files
-from Windows resulted in losing files or corrupting data.
+from Windows can result in losing files or corrupting data.
 
 This also means that if you want to for instance copy a file into your subsystem
 this has to be done from inside the WSL.
