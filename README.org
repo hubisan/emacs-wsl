@@ -322,7 +322,9 @@ Start XLaunch and use the defaults:
 Just make a shortcut to vcxsrv.exe in the installation folder and then changes
 its target to:
 
-~"C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl~
+#+BEGIN_SRC shell
+"C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
+#+END_SRC
 
 You can put this link into the startup folder to start in when booting. And
 stick it to the task bar to launch it from there.
