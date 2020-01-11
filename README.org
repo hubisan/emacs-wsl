@@ -6,7 +6,7 @@ This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL
 in Windows 10. Emacs can either be run with a graphical display or directly in
 the terminal.
 
-This guide is using Ubuntu 18.04 LTS as Linux distrubition and lxde as desktop.
+This guide is using Ubuntu 18.04 LTS as Linux distribution and lxde as desktop.
 
 #+caption: Graphical Emacs in Windows 10 with WSL
 [[./img/emacs-wsl.png]]
@@ -51,7 +51,7 @@ This can also be done with:
 [[https://docs.microsoft.com/en-us/windows/wsl/install-win10#install-your-linux-distribution-of-choice][install-your-linux-distribution-of-choice]]
 #+end_quote
 
-You can install the linux distribution:
+You can install the Linux distribution:
 
 - [[https://docs.microsoft.com/en-us/windows/wsl/install-win10#windows-10-fall-creators-update-and-later-install-from-the-microsoft-store][from the Microsoft store]]
 - [[https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distros-via-the-command-line][from the command line]] (used in this guide)
@@ -105,7 +105,7 @@ configured inside the file "/etc/wsl.conf". The default is as follows:
 *** [automount]
 
 - enabled :: true causes fixed drives (i.e C:/ or D:/) to be automatically
-     mounted with DrvFs under /mnt. false means drives won’t be mounted
+     mounted with DrvFs under /mnt. False means drives won’t be mounted
      automatically, but you could still mount them manually or via fstab.
 - mountFsTab :: true sets /etc/fstab to be processed on WSL start. /etc/fstab is
      a file where you can declare other filesystems, like an SMB share. Thus,
@@ -285,18 +285,20 @@ your init.el etc.
 
 * Run Emacs in graphical display
 
-To be able to run Emacs with a graphical display you need to install a linux
-desktop and a Windows x server.
+To be able to run Emacs with a graphical display you need to install a Linux
+desktop and a Windows X server.
 
-** Install Windows x server
+** Install Windows X server
 
 An X server lets you access a Linux application or desktop environment’s graphic
-user interface (GUI). Using open source VcXsrv:
+user interface (GUI).
+
+Using open source VcXsrv:
 
 - Download it from [[https://sourceforge.net/projects/vcxsrv/]]
 - Install it by executing the exe
 
-** Install the linux desktop
+** Install the Linux desktop
 
 Using lxde (lightweight one):
 
@@ -317,16 +319,15 @@ Start XLaunch and use the defaults:
 - Leave checkboxes, Next
 - Finish
 
-**** Shortcut using command line
+**** Make a Shortcut
 
-Just make a shortcut to vcxsrv.exe in the installation folder and then changes
-its target to:
+Make a shortcut to vcxsrv.exe and then change its target to:
 
 #+BEGIN_SRC shell
 "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
 #+END_SRC
 
-You can put this link into the startup folder to start in when booting. And
+You can put this link into the startup folder to start it when booting. And
 stick it to the task bar to launch it from there.
 
 Taken from https://superuser.com/a/1372940.
@@ -367,7 +368,7 @@ Now you can fire wsl up and run ~eme~.
 *** Start distribution & run Emacs in there
 
 You can of course also run the distribution (after running the xserver) and then
-run Emacs in there. To start the disttribution (in this case lxde).
+run Emacs in there. To start the disttribution (in this case lxde):
 
 #+BEGIN_SRC shell
   export DISPLAY=:0
