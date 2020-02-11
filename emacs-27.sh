@@ -17,7 +17,7 @@ sudo apt install -y autoconf automake autotools-dev bsd-mailx build-essential \
 ## download and install
 
 cd ~
-git clone -b master --depth 1 git://git.sv.gnu.org/emacs.git
+git clone -b emacs-27 --depth 1 git://git.sv.gnu.org/emacs.git
 cd emacs
 ./autogen.sh
 ./configure
