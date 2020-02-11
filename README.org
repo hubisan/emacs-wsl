@@ -246,19 +246,17 @@ Restart WSL.
 This installs all dependencies for Emacs and then installs Emacs 26.3:
 
 #+BEGIN_SRC shell
-  ## install dependencies
+  ## install dependencies (got those from all over the net)
 
-  sudo apt install -y build-essential texinfo libx11-dev libxpm-dev \
-       libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev \
-       libncurses-dev gnutls-dev libgtk-3-dev libgnutls28-dev
-
-  # some more from a stackoverflow, eww was not working before
-
-  sudo apt install -y autoconf automake libtool xorg-dev libncurses5-dev \
-      libdbus-1-dev libm17n-dev librsvg2-dev libotf-dev libxml2-dev \
-      libmagickwand-dev libc6-dev libtiff5-dev xaw3dg-dev \
-      zlib1g-dev libice-dev libsm-dev libxext-dev libxi-dev libxmu-dev \
-      libxmuu-dev libxrandr-dev libxt-dev libxtst-dev libxv-dev
+  sudo apt install -y autoconf automake autotools-dev bsd-mailx build-essential \
+      diffstat gnutls-dev imagemagick libasound2-dev libc6-dev libdatrie-dev \
+      libdbus-1-dev libgconf2-dev libgif-dev libgnutls28-dev libgpm-dev libgtk2.0-dev \
+      libgtk-3-dev libice-dev libjpeg-dev liblockfile-dev liblqr-1-0 libm17n-dev \
+      libmagickwand-dev libncurses5-dev libncurses-dev libotf-dev libpng-dev \
+      librsvg2-dev libsm-dev libthai-dev libtiff5-dev libtiff-dev libtinfo-dev libtool \
+      libx11-dev libxext-dev libxi-dev libxml2-dev libxmu-dev libxmuu-dev libxpm-dev \
+      libxrandr-dev libxt-dev libxtst-dev libxv-dev quilt sharutils texinfo xaw3dg \
+      xaw3dg-dev xorg-dev xutils-dev zlib1g-dev
 
   ## download and install
 
