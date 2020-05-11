@@ -304,9 +304,9 @@ You have to install Cygwin and install additional packages:
 
 - Download Cygwin from https://cygwin.com/install.html.
 - Run the setup to install Cygwin. When you come to the ~select packages~ step
-  you have to add (change from skip to the newest version) ~xorg-server~,
-  ~xinit~. If you want to use the wizard for launching the X-Server
-  add ~xlaunch~ as well.
+  you have to add (change from skip to the newest version) ~xorg-server~ and
+  ~xinit~. If you want to use the wizard (GUI) for launching the X-Server add
+  ~xlaunch~ as well.
 - If you missed that step you can easily add those packages later on by running
   the setup again.
 
