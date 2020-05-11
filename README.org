@@ -6,7 +6,7 @@ This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL
 in Windows 10. Emacs can either be run with a graphical display or directly in
 the terminal.
 
-This guide is using Ubuntu 18.04 LTS as Linux distribution and lxde as desktop.
+This guide is using Ubuntu 18.04 LTS as Linux distribution.
 
 #+caption: Graphical Emacs in Windows 10 with WSL
 [[./img/emacs-wsl.png]]
@@ -284,8 +284,8 @@ your init.el etc.
 
 * Run Emacs in graphical display
 
-To be able to run Emacs with a graphical display you need to install a Linux
-desktop and a Windows X server.
+To be able to run Emacs with a graphical display you need to install a Windows X
+server.
 
 ** Install Windows X server
 
@@ -296,14 +296,6 @@ Using open source VcXsrv:
 
 - Download it from [[https://sourceforge.net/projects/vcxsrv/]]
 - Install it by executing the exe
-
-** Install the Linux desktop
-
-Using lxde (lightweight one):
-
-#+BEGIN_SRC shell
-  sudo apt install lxde
-#+END_SRC
 
 ** Run Emacs
 
@@ -349,8 +341,8 @@ This will open Emacs in a new window. By using setsid this is done in a new
 session and therefore the WSL can be closed after with exit. You can just change
 it to ~emacs~ and remove ~exit~ if you want.
 
-To not have to type this over and over make an alias in "~/.bashrc" or if you
-installed zsh in "~/.zshrc":
+To not have to type this over and over make an alias in =~/.bashrc= or if you
+installed zsh in =~/.zshrc=:
 
 #+BEGIN_SRC shell
   alias eme='
@@ -363,19 +355,6 @@ installed zsh in "~/.zshrc":
 #+END_SRC
 
 Now you can fire wsl up and run ~eme~.
-
-*** Start distribution & run Emacs in there
-
-You can of course also run the distribution (after running the xserver) and then
-run Emacs in there. To start the disttribution (in this case lxde):
-
-#+BEGIN_SRC shell
-  export DISPLAY=:0
-  export LIBGL_ALWAYS_INDIRECT=1
-  # OPTIONAL Set the keyboard layout to US
-  setxkbmap -layout us
-  startlxde
-#+END_SRC
 
 * Remarks
 
