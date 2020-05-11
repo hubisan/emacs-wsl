@@ -287,19 +287,32 @@ your init.el etc.
 To be able to run Emacs with a graphical display you need to install a Windows X
 server.
 
-** Install Windows X server
+** Install Windows X-server
 
-An X server lets you access a Linux application or desktop environment’s graphic
+An X-server lets you access a Linux application or desktop environment’s graphic
 user interface (GUI).
 
-Using open source VcXsrv:
+You can use [[https://sourceforge.net/projects/vcxsrv/][VcXsrv]] or [[https://x.cygwin.com/][Cygwin/X]]. Both are free and based on xorg.
 
-- Download it from [[https://sourceforge.net/projects/vcxsrv/]]
-- Install it by executing the exe
+*** Install VcXsrv
+
+Download VcXsrv from [[https://sourceforge.net/projects/vcxsrv/]] and install it.
+
+*** Install Cygwin/X
+
+You have to install Cygwin and install additional packages:
+
+- Download Cygwin from https://cygwin.com/install.html.
+- Run the setup to install Cygwin. When you come to the ~select packages~ step
+  you have to add (change from skip to the newest version) ~xorg-server~ and
+  ~xinit~. If you want to use the wizard (GUI) for launching the X-Server add
+  ~xlaunch~ as well.
+- If you missed that step you can easily add those packages later on by running
+  the setup again.
 
 ** Run Emacs
 
-*** Run the xserver
+*** Run the X-server
 
 **** With XLaunch (GUI)
 
@@ -310,18 +323,31 @@ Start XLaunch and use the defaults:
 - Leave checkboxes, Next
 - Finish
 
-**** Make a Shortcut
+**** With a Shortcut
 
-Make a shortcut to vcxsrv.exe and then change its target to:
+Make a shortcut (right click on your desktop > New > Shortcut) and use the
+following as target.
 
-#+BEGIN_SRC shell
-"C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
-#+END_SRC
+- With VcXsrv:
 
-You can put this link into the startup folder to start it when booting. And
+  #+BEGIN_SRC shell
+    # Change the path if installed somewhere else.
+    "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
+  #+END_SRC
+
+- With Cygwin/X:
+
+  #+BEGIN_SRC shell
+    # Change the path if installed somewhere else.
+    "C:\cygwin64\bin\run.exe" --quote /usr/bin/bash.exe -l -c "XWin :0 -listen tcp -multiwindow -clipboard -wgl"
+  #+END_SRC
+
+You can put the shortcut into the startup folder to start it when booting. Or
 stick it to the task bar to launch it from there.
 
-Taken from https://superuser.com/a/1372940.
+**** From command line
+
+You can use the command from the [[*With a Shortcut][Shortcut]] also from the command line.
 
 *** Run Emacs from WSL
 
