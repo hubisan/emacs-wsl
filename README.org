@@ -137,7 +137,8 @@ configured inside the file "/etc/wsl.conf". The default is as follows:
 
 ** User
 
-Instead of using root user it's better to add an user.
+Instead of using root user it's better to add an user and use that as default
+user.
 
 *** Add user
 
@@ -145,11 +146,19 @@ Instead of using root user it's better to add an user.
   sudo adduser <username>
 #+END_SRC
 
+*** Make it a sudo user
+
+Make that user be a sudo user:
+
+#+BEGIN_SRC shell
+  sudo usermod -a -G sudo <username>
+#+END_SRC
+
 *** Change default user
 
 Change the default user which is used when starting the WSL.
 
-Open cmd.exe and run:
+Open ~cmd.exe~ and run:
 
 #+BEGIN_SRC shell
   ubuntu config --default-user <username>
@@ -157,16 +166,8 @@ Open cmd.exe and run:
 
 Restart WSL.
 
-*** Make it a sudo user
-
-Make that user be a sudo user:
-
-#+BEGIN_SRC shell
-  # change to root
-  sudo su -
-  sudo usermod -a -G sudo <username>
-  exit
-#+END_SRC
+You can change the default back to root by using ~root~ as username. To change
+to root inside wsl temporarily use ~sudo su -~.
 
 ** Ssh key
 
