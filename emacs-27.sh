@@ -12,7 +12,7 @@ sudo apt install -y autoconf automake autotools-dev bsd-mailx build-essential \
     librsvg2-dev libsm-dev libthai-dev libtiff5-dev libtiff-dev libtinfo-dev libtool \
     libx11-dev libxext-dev libxi-dev libxml2-dev libxmu-dev libxmuu-dev libxpm-dev \
     libxrandr-dev libxt-dev libxtst-dev libxv-dev quilt sharutils texinfo xaw3dg \
-    xaw3dg-dev xorg-dev xutils-dev zlib1g-dev
+    xaw3dg-dev xorg-dev xutils-dev zlib1g-dev libjansson-dev
 
 ## download and install
 
