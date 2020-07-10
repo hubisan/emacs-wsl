@@ -221,13 +221,13 @@ This installs all dependencies for Emacs and then installs Emacs 26.3:
   ./configure
   make
   sudo make install
-
-  cd ~
-  rm -rf ~/emacs-26.3
   rm ~/emacs-26.3.tar.gz
 #+END_SRC
 
 See[[file:emacs-27.sh][ emacs-27.sh]] to install Emacs 27 instead.
+
+Keeps the directory where emacs was extracted or cloned to in case any step
+fails (to clean or reinstall) or to be able to reconfigure.
 
 * Run Emacs in terminal
 
