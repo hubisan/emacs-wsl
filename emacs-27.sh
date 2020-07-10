@@ -24,5 +24,3 @@ cd emacs
 ./configure
 make
 sudo make install
-cd ~
-rm -rf ~/emacs
