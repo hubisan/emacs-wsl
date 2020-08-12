@@ -196,7 +196,7 @@ Restart WSL.
 
 * Install Emacs
 
-Install all dependencies for Emacs and then install Emacs 26.3:
+Install all dependencies for Emacs and then install Emacs 27.1:
 
 #+BEGIN_SRC shell
   ## install dependencies (got those from all over the net and from the snap)
@@ -221,16 +221,14 @@ Install all dependencies for Emacs and then install Emacs 26.3:
   ## download and install
 
   cd ~
-  wget https://ftp.gnu.org/pub/gnu/emacs/emacs-26.3.tar.gz
-  tar -xzvf emacs-26.3.tar.gz
-  cd emacs-26.3
+  wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.1.tar.gz
+  tar -xzvf emacs-27.1.tar.gz
+  cd emacs-27.1
   ./configure
   make
   sudo make install
-  rm ~/emacs-26.3.tar.gz
+  rm ~/emacs-27.1.tar.gz
 #+END_SRC
-
-See[[file:emacs-27.sh][ emacs-27.sh]] to install Emacs 27 instead.
 
 Keeps the directory where emacs was extracted or cloned to in case any step
 fails (to clean or reinstall) or to be able to reconfigure.
