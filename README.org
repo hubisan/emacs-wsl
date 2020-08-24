@@ -47,6 +47,9 @@ This can also be done with:
 
 * Install the Linux distribution
 
+Install a linux distribution. This guide should work for all Debian based ones.
+But it is only tested on Ubuntu 18.04.
+
 #+begin_quote
 [[https://docs.microsoft.com/en-us/windows/wsl/install-win10#install-your-linux-distribution-of-choice][install-your-linux-distribution-of-choice]]
 #+end_quote
@@ -312,7 +315,7 @@ Open WSL and run (this also changes the keyboard layout used to US, remove if
 yout don't want this. Then it should use your default keyboard layout):
 
 #+BEGIN_SRC shell
-  export DISPLAY=:0
+  export DISPLAY=:0.0
   export LIBGL_ALWAYS_INDIRECT=1
   # OPTIONAL Set the keyboard layout to US
   setxkbmap -layout us
@@ -337,7 +340,34 @@ installed zsh in =~/.zshrc=:
   '
 #+END_SRC
 
-Now you can fire wsl up and run ~eme~.
+Now you can fire WSL up and run ~eme~.
+
+**** Changes need if using WSL2
+
+Was not able to test this so far but according to multiple sources this should
+work. Check out the open issue https://github.com/hubisan/emacs-wsl/issues/3 for
+more.
+
+To make this work on WSL2 you have to disable access control in VcXsrv by
+changing the link to (added ~-ac~ flag):
+
+#+BEGIN_SRC shell
+  # Change the path if installed somewhere else.
+  "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl -ac
+#+END_SRC
+
+And to run Emacs you need to use this:
+
+#+BEGIN_SRC shell
+  export DISPLAY_NUMBER="0.0"
+  export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):$DISPLAY_NUMBER
+  export LIBGL_ALWAYS_INDIRECT=1
+  # OPTIONAL Set the keyboard layout to US
+  setxkbmap -layout us
+  setsid emacs
+  exit
+#+END_SRC
+
 
 * Remarks
 
