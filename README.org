@@ -342,10 +342,10 @@ installed zsh in =~/.zshrc=:
 
 Now you can fire WSL up and run ~eme~.
 
-**** Changes need if using WSL2
+**** Changes needed if using WSL2
 
 Was not able to test this so far but according to multiple sources this should
-work. Check out the open issue https://github.com/hubisan/emacs-wsl/issues/3 for
+work. Check out the open issue #3 for
 more.
 
 To make this work on WSL2 you have to disable access control in VcXsrv by
