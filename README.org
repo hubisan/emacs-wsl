@@ -17,6 +17,7 @@ This guide is using Ubuntu 18.04 LTS as Linux distribution.
 :END:
 - [[#enable-the-windows-subsystem-for-linux][Enable the Windows Subsystem for Linux]]
 - [[#install-the-linux-distribution][Install the Linux distribution]]
+- [[#use-windows-terminal][Use Windows Terminal]]
 - [[#configure-wsl][Configure WSL]]
 - [[#install-emacs][Install Emacs]]
 - [[#run-emacs-in-terminal][Run Emacs in terminal]]
@@ -69,9 +70,30 @@ Installing Ubuntu 18.04 from command line with PowerShell.
   Add-AppxPackage .\ubuntu-1804.appx
 #+END_SRC
 
+* Use Windows Terminal
+
+This step is optional but recommended.
+
+Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
+
+#+BEGIN_QUOTE
+The Windows Terminal is a modern, fast, efficient, powerful, and productive
+terminal application for users of command-line tools and shells like Command
+Prompt, PowerShell, and WSL.
+#+END_QUOTE
+
+To make it open WSL by default
+
+- Open the Windows Terminal.
+- Open the settings by clicking on the dropdown button to add a new tab and then
+  select settings (bound to ~Ctrl-,~).
+- Copy the GUID for WSL (example: {12345678-1234-1234-1234-1234567890AB}).
+- Set it as default profile to the one copied form WSL: (example:
+  "defaultProfile" : "{12345678-1234-1234-1234-1234567890AB}",)
+
 * Configure WSL
 
-Start the WSL and configure it.
+Start the WSL (in Windows Termin if you have installed it) and configure it.
 
 ** Update
 
@@ -367,7 +389,6 @@ And to run Emacs you need to use this:
   setsid emacs
   exit
 #+END_SRC
-
 
 * Remarks
 
