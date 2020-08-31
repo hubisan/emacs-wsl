@@ -255,8 +255,10 @@ Install all dependencies for Emacs and then install Emacs 27.1:
   rm ~/emacs-27.1.tar.gz
 #+END_SRC
 
-Keeps the directory where emacs was extracted or cloned to in case any step
-fails (to clean or reinstall) or to be able to reconfigure.
+Keeps the directory where emacs was cloned to in case any step fails (to clean
+or reinstall) or to be able to reconfigure.
+
+There is also a [[emacs-27.1.sh][script]] included in the repository with those steps.
 
 * Run Emacs in terminal
 
