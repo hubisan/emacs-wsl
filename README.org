@@ -366,6 +366,13 @@ installed zsh in =~/.zshrc=:
 
 Now you can fire WSL up and run ~eme~.
 
+**** remark
+For the *setxkbmap -layout us* line, make sure you have *x11-xkb-utils* installed
+using 
+#+BEGIN_SRC shell
+sudo apt install x11-xkb-utils.
+#+END_SRC
+
 **** Changes needed if using WSL2
 
 Was not able to test this so far but according to multiple sources this should
