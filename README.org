@@ -82,13 +82,13 @@ terminal application for users of command-line tools and shells like Command
 Prompt, PowerShell, and WSL.
 #+END_QUOTE
 
-To make it open WSL by default
+To make it open WSL by default:
 
 - Open the Windows Terminal.
 - Open the settings by clicking on the dropdown button to add a new tab and then
-  select settings (bound to ~Ctrl-,~).
+  select settings (bound to @@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
 - Copy the GUID for WSL (example: {12345678-1234-1234-1234-1234567890AB}).
-- Set it as default profile to the one copied form WSL: (example:
+- Set the default profile to the one copied from WSL: (example:
   "defaultProfile" : "{12345678-1234-1234-1234-1234567890AB}",)
 
 * Configure WSL
