@@ -87,14 +87,14 @@ To make it open WSL by default:
 - Open the Windows Terminal.
 - Open the settings by clicking on the dropdown button in the tab bar and then
   select settings (bound to @@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
-- Copy the GUID for WSL (example: ~{12345678-1234-1234-1234-1234567890AB}~).
+- Copy the GUID for WSL (example: ={12345678-1234-1234-1234-1234567890AB}=).
 - Set the default profile to the one copied from WSL: (example:
-  ~"defaultProfile" : "{12345678-1234-1234-1234-1234567890AB}",~)
+  ="defaultProfile" : "{12345678-1234-1234-1234-1234567890AB}",=)
 
 To change the default path to =~=:
 
 - Go to the settings again.
-- Add a line in the WSL part at the end ~"startingDirectory": "//wsl$/Ubuntu-18.04/home/<username>/"~
+- Add a line in the WSL part at the end ="startingDirectory": "//wsl$/Ubuntu-18.04/home/<username>/"=.
 
 * Configure WSL
 
