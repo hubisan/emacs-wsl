@@ -20,8 +20,8 @@ This guide is using Ubuntu 18.04 LTS as Linux distribution.
 - [[#use-windows-terminal][Use Windows Terminal]]
 - [[#configure-wsl][Configure WSL]]
 - [[#install-emacs][Install Emacs]]
-- [[#run-emacs-in-terminal][Run Emacs in terminal]]
-- [[#run-emacs-in-graphical-display][Run Emacs in graphical display]]
+- [[#run-emacs-in-terminal][Run Emacs in Terminal]]
+- [[#run-emacs-in-graphical-display][Run Emacs in Graphical Display]]
 - [[#remarks][Remarks]]
 - [[#faq][FAQ]]
 
@@ -85,15 +85,20 @@ Prompt, PowerShell, and WSL.
 To make it open WSL by default:
 
 - Open the Windows Terminal.
-- Open the settings by clicking on the dropdown button to add a new tab and then
+- Open the settings by clicking on the dropdown button in the tab bar and then
   select settings (bound to @@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
-- Copy the GUID for WSL (example: {12345678-1234-1234-1234-1234567890AB}).
+- Copy the GUID for WSL (example: ~{12345678-1234-1234-1234-1234567890AB}~).
 - Set the default profile to the one copied from WSL: (example:
-  "defaultProfile" : "{12345678-1234-1234-1234-1234567890AB}",)
+  ~"defaultProfile" : "{12345678-1234-1234-1234-1234567890AB}",~)
+
+To change the default path to =~=:
+
+- Go to the settings again.
+- Add a line in the WSL part at the end ~"startingDirectory": "//wsl$/Ubuntu-18.04/home/<username>/"~
 
 * Configure WSL
 
-Start the WSL (in Windows Termin if you have installed it) and configure it.
+Start the WSL (in Windows Terminal if you have installed it) and configure it.
 
 ** Update
 
@@ -260,13 +265,13 @@ or reinstall) or to be able to reconfigure.
 
 There is also a [[emacs-27.1.sh][script]] included in the repository with those steps.
 
-* Run Emacs in terminal
+* Run Emacs in Terminal
 
 Run Emacs with ~emacs -nw~ to see if it is working. You can also see what path
 it is using as home with ~C-h v user-emacs-directory~. That's where you can place
 your init.el etc.
 
-* Run Emacs in graphical display
+* Run Emacs in Graphical Display
 
 To be able to run Emacs with a graphical display you need to install a Windows X
 server.
@@ -335,8 +340,8 @@ You can use the command from the [[*With a Shortcut][Shortcut]] also from the co
 
 *** Run Emacs from WSL
 
-Open WSL and run (this also changes the keyboard layout used to US, remove if
-yout don't want this. Then it should use your default keyboard layout):
+Open WSL and run (this also changes the keyboard layout to US, remove if
+you don't want this. Then it should use your default keyboard layout.):
 
 #+BEGIN_SRC shell
   export DISPLAY=:0.0
@@ -349,7 +354,8 @@ yout don't want this. Then it should use your default keyboard layout):
 
 This will open Emacs in a new window. By using setsid this is done in a new
 session and therefore the WSL can be closed after with exit. You can just change
-it to ~emacs~ and remove ~exit~ if you want.
+it to ~emacs~ and remove ~exit~ if you want. Make sure ~x11-xkb-utils~ is
+installed (~sudo apt install x11-xkb-utils~) if you want to change the keyboard layout.
 
 To not have to type this over and over make an alias in =~/.bashrc= or if you
 installed zsh in =~/.zshrc=:
@@ -365,13 +371,6 @@ installed zsh in =~/.zshrc=:
 #+END_SRC
 
 Now you can fire WSL up and run ~eme~.
-
-**** remark
-For the *setxkbmap -layout us* line, make sure you have *x11-xkb-utils* installed
-using 
-#+BEGIN_SRC shell
-sudo apt install x11-xkb-utils.
-#+END_SRC
 
 **** Changes needed if using WSL2
 
