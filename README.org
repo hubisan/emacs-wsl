@@ -48,7 +48,7 @@ This can also be done with:
 
 * Install the Linux distribution
 
-Install a linux distribution. This guide should work for all Debian based ones.
+Install a Linux distribution. This guide should work for all Debian based ones.
 But it is only tested on Ubuntu 18.04.
 
 #+begin_quote
@@ -93,7 +93,7 @@ To make it open WSL by default:
 
 * Configure WSL
 
-Start the WSL (in Windows Termin if you have installed it) and configure it.
+Start the WSL (in Windows Terminal if you have installed it) and configure it.
 
 ** Update
 
@@ -114,7 +114,7 @@ No need to touch that file, just leave the defaults.
 
 ** User
 
-Instead of using root user it's better to add an user and use that as default
+Instead of using root user it's better to add a user and use that as default
 user.
 
 *** Add user
@@ -144,7 +144,7 @@ Open ~cmd.exe~ and run:
 Restart WSL.
 
 You can change the default back to root by using ~root~ as username. To change
-to root inside wsl temporarily use ~sudo su -~.
+to root inside WSL temporarily use ~sudo su -~.
 
 ** Ssh key
 
@@ -255,7 +255,7 @@ Install all dependencies for Emacs and then install Emacs 27.1:
   rm ~/emacs-27.1.tar.gz
 #+END_SRC
 
-Keeps the directory where emacs was cloned to in case any step fails (to clean
+Keeps the directory where Emacs was cloned to in case any step fails (to clean
 or reinstall) or to be able to reconfigure.
 
 There is also a [[emacs-27.1.sh][script]] included in the repository with those steps.
@@ -295,6 +295,9 @@ You have to install Cygwin and install additional packages:
   the setup again.
 
 ** Run Emacs
+
+If you are using WSL2 some changes are needed. Make sure to also read the
+[[#changes-needed-for-wsl2][section]] at the end of this one.
 
 *** Run the X-server
 
@@ -336,7 +339,7 @@ You can use the command from the [[*With a Shortcut][Shortcut]] also from the co
 *** Run Emacs from WSL
 
 Open WSL and run (this also changes the keyboard layout used to US, remove if
-yout don't want this. Then it should use your default keyboard layout):
+you don't want this. Then it should use your default keyboard layout):
 
 #+BEGIN_SRC shell
   export DISPLAY=:0.0
@@ -366,7 +369,25 @@ installed zsh in =~/.zshrc=:
 
 Now you can fire WSL up and run ~eme~.
 
-**** Changes needed if using WSL2
+**** Desktop shortcut
+
+You can create a shortcut on your desktop to launch Emacs. Create a new file
+named ~emacs-wsl.vbs~ on your desktop with the following content (change ~bash~
+to ~zsh~ if you are using it):
+
+#+BEGIN_SRC text
+  Set oShell = CreateObject ("Wscript.Shell")
+  Dim strArgs
+  strArgs = "wsl bash -c 'export DISPLAY=:0.0 && export LIBGL_ALWAYS_INDIRECT=1 && setxkbmap -layout us && emacs'"
+  oShell.Run strArgs, 0, false
+#+END_SRC
+
+Now you can launch Emacs in WSL by double-clicking the file.
+
+**** Changes needed for WSL2
+:PROPERTIES:
+:CUSTOM_ID: changes-needed-for-wsl2
+:END:
 
 Was not able to test this so far but according to multiple sources this should
 work. Check out the open issue #3 for
@@ -391,7 +412,6 @@ And to run Emacs you need to use this:
   setsid emacs
   exit
 #+END_SRC
-
 * Remarks
 
 ** Accessing Linux files from Windows
