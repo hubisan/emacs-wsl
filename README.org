@@ -324,7 +324,7 @@ Start XLaunch and use the defaults:
 
 - Multiple Windows, Display number -1 (or 0 if not working), Next
 - Start no client, Next
-- Leave checkboxes, Next
+- Leave checkboxes, Additional parameters for X server: ~-listen tcp~, Next
 - Finish
 
 **** With a Shortcut
