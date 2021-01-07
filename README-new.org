@@ -11,7 +11,17 @@ VcXsrv as X server to run Emacs in a graphical display.
 
 * TODO Install WSL 1 or WSL 2
 
-* TODO Install Ubuntu
+* TODO Install & Configure Ubuntu
+
+** User? Looks like this is done but still mention it.
+
+** Update
+
+Make sure everything is up to date:
+
+#+BEGIN_SRC shell
+  sudo apt update && sudo apt upgrade -y
+#+END_SRC
 
 * TODO Install Emacs
 
@@ -40,13 +50,13 @@ has blocked some features.
 
 You have to allow VcXsrv to communicate on:
 
-- *WSL 1*: Private networks
-- *WSL 2*: Private and public networks.
+- ~WSL 1~ Private networks
+- ~WSL 2~ Private and public networks.
 
-The following inbound rules are added:
+After allowing access the following inbound rules are added:
 
-- *WSl 1* :: [[./img/vcxsrv-wsl1-firewall-inbound-rules.png]]
-- *WSL 2* :: [[./img/vcxsrv-wsl2-firewall-inbound-rules.png]]
+- ~WSl 1~ [[./img/vcxsrv-wsl1-firewall-inbound-rules.png]]
+- ~WSL 2~ [[./img/vcxsrv-wsl2-firewall-inbound-rules.png]]
 
 If you missed this step or are not sure what you've chosen or if you are
 switching from WSL 1 to WSL 2 you can retrigger this dialog by deleting the
@@ -67,11 +77,11 @@ caution. This option exists primarily for running test suites remotely.
 
 Therefore we want to restrict the access as much as possible.
 
-Unfortunately you can't modify the firewall rules if you have *no admin rights*.
+Unfortunately you can't modify the firewall rules if you have _*no admin rights*_.
 In that case you have to live with the security issue (not sure how severe it
 is) or use WSL 1 or use Emacs in the terminal.
 
-If you have *admin rights* you can add an inbound firewall rule to restrict
+If you have _*admin rights*_ you can add an inbound firewall rule to restrict
 access as much as possible. As the IP used by WSL 2 is dynamic a powershell
 script is provided to create/update the rule.
 
@@ -84,38 +94,164 @@ Make sure that you disable the existing inbound rules:
 
 **** TODO
 
-Then run the powershell script to create/update the firewall rule.
-
-If VcXsrv was running before the firewall rules was updated it has to be
-restarted.
+Then run the powershell script to create/update the firewall rule. If VcXsrv was
+running before the firewall rules was updated it has to be restarted.
 
 ** Run VcXsrv
 
-To run VcXsrv use the batch-script provided. If you haven't used the default installation path
-you have to adapt the script:
+To run VcXsrv use the batch-script provided in the ~scripts~ folder (just
+double-click it). If you haven't used the default installation path you have to
+adapt the script:
 
 *** TODO
 
-- WSL 1
-
+- ~WSL 1~ link
   #+BEGIN_SRC bat
     start "" "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
   #+END_SRC
-
-- WSL 2
-
+- ~WSL 2~ link
   #+BEGIN_SRC bat
     start "" "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl -ac
   #+END_SRC
-
-  If you are using the additional firewall rule make sure to update the rule
-  before launching VcXsrv.
+  If you are using the additional firewall rule make sure to create/update the
+  rule before launching VcXsrv.
 
 If VcXsrv is already running it will show an error message.
 
-* Run Emacs in Graphical Display
+* TODO Run Emacs in Graphical Display
 
 * TODO Optional Additions
+
+** TODO Use Windows Terminal
+
+Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
+
+#+BEGIN_QUOTE
+The Windows Terminal is a modern, fast, efficient, powerful, and productive
+terminal application for users of command-line tools and shells like Command
+Prompt, PowerShell, and WSL.
+#+END_QUOTE
+
+To make it open WSL by default:
+
+- Open the Windows Terminal.
+- Open the settings by clicking on the dropdown button in the tab bar and then
+  select settings (bound to @@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
+- Copy the GUID for WSL (example: {12345678-1234-1234-1234-1234567890AB}).
+- Set the default profile to the one copied from WSL:
+  #+BEGIN_SRC js
+    {
+        ...
+        "defaultProfile": "{12345678-1234-1234-1234-1234567890AB}",
+        ...
+  #+END_SRC
+
+To change the default path to =~=:
+
+- Go to the settings (@@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
+- Add a line in the WSL part at the end:
+  #+BEGIN_SRC js
+    {
+        ...
+        "source": "Windows.Terminal.Wsl",
+        "startingDirectory": "//wsl$/Ubuntu-18.04/home/<username>/"
+    },
+  #+END_SRC
+
+** TODO User
+
+Instead of using root user it's better to add a user and use that as default
+user.
+
+*** Add user
+
+#+BEGIN_SRC shell
+  sudo adduser <username>
+#+END_SRC
+
+*** Make it a sudo user
+
+Make that user be a sudo user:
+
+#+BEGIN_SRC shell
+  sudo usermod -a -G sudo <username>
+#+END_SRC
+
+*** Change default user
+
+Change the default user which is used when starting the WSL.
+
+Open ~cmd.exe~ and run:
+
+#+BEGIN_SRC shell
+  ubuntu config --default-user <username>
+#+END_SRC
+
+Restart WSL.
+
+You can change the default back to root by using ~root~ as username. To change
+to root inside WSL temporarily use ~sudo su -~.
+
+** TODO Ssh key
+
+Generate a new ED25519 SSH key pair:
+
+#+BEGIN_SRC shell
+  ssh-keygen -t ed25519 -C "email@example.com"
+#+END_SRC
+
+A dialog will ask you to:
+
+- input a file path: use the suggested path by pressing ~Enter~
+- enter a password: enter your password
+
+To copy the generated ssh key into the clipboard use:
+
+#+BEGIN_SRC shell
+  clip.exe < ~/.ssh/id_ed25519.pub
+#+END_SRC
+
+** TODO Use en_US Language
+
+Bash on Ubuntu on Windows starts on the language defined in your Country or
+Region settings. If you want to change the default language to en_US you may
+need to follow these steps:
+
+#+BEGIN_SRC shell
+  sudo apt install -y language-pack-en language-pack-en-base manpages
+  sudo locale-gen en_US.UTF-8
+  sudo update-locale LANG=en_US.UTF8
+#+END_SRC
+
+** TODO Mount network drives
+
+To do so the fstab file needs to be configured.
+
+For instance to mount ~H:~ add this to "/etc/fstab" (the directory has to exist to
+make this work, so in this case ~sudo mkdir /mnt/h~ is needed beforehand):
+
+#+BEGIN_SRC text
+  H: /mnt/h drvfs defaults 0 0
+#+END_SRC
+
+From now on that network drive is automatically mounted.
+
+
+** TODO Zsh
+
+If you want to use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-my-zsh]]:
+
+#+BEGIN_SRC shell
+  sudo apt install zsh
+  chsh -s $(which zsh)
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#+END_SRC
+
+Restart WSL.
+
+*** TODO
+In some scripts you need to change bash to zsh to be able to use it when
+emulating a terminal in Emacs.
 
 * TODO FAQ
 
