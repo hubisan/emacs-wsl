@@ -71,8 +71,8 @@ above can be found at @@html:<kbd>@@WIN@@html:</kbd>@@ Windows Defender Firewall
 
 *** WSL 2 Additional Firewall Configuration
 
-To make the VcXsrv work with WSL 2 you have to disable access control. Disabling
-the user access control with the ~-ac~ flag has some [[https://www.xfree86.org/current/Xserver.1.html][security issues]]:
+To make VcXsrv work with WSL 2 you have to disable access control. Disabling the
+user access control with the ~-ac~ flag has some [[https://www.xfree86.org/current/Xserver.1.html][security issues]]:
 
 #+BEGIN_QUOTE
 -ac disables host-based access control mechanisms. Enables access by any host,
@@ -82,11 +82,11 @@ caution. This option exists primarily for running test suites remotely.
 
 Therefore we want to restrict the access as much as possible.
 
-Unfortunately you can't modify the firewall rules if you have _no admin rights_.
+Unfortunately you can't modify the firewall rules if you have ~no admin rights~.
 In that case you have to live with the security issue (not sure how severe it
 is) or use WSL 1 or use Emacs in the terminal.
 
-If you have _admin rights_ you can add an inbound firewall rule to restrict
+If you have ~admin rights~ you can add an inbound firewall rule to restrict
 access as much as possible. As the IP used by WSL 2 is dynamic a powershell
 script is provided to create/update the rule.
 
