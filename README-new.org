@@ -33,7 +33,7 @@ To try out if Emacs is working just run it directly in the terminal with ~emacs
 * Install Windows X-Server VcXsrv
 
 An X-server lets you access a Linux application or desktop environment’s graphic
-user interface (GUI). This guide is [[https://sourceforge.net/projects/vcxsrv/][VcXsrv]] (free, open source, GPLv3).
+user interface (GUI). This guide is using [[https://sourceforge.net/projects/vcxsrv/][VcXsrv]] (free, open source, GPLv3).
 
 ** Installation
 
@@ -55,14 +55,16 @@ You have to allow VcXsrv to communicate on:
 
 After allowing access the following inbound rules are added:
 
-- ~WSl 1~ [[./img/vcxsrv-wsl1-firewall-inbound-rules.png]]
-- ~WSL 2~ [[./img/vcxsrv-wsl2-firewall-inbound-rules.png]]
+- ~WSl 1~ [[
+  ./img/vcxsrv-wsl1-firewall-inbound-rules.png]]
+- ~WSL 2~ [[
+  ./img/vcxsrv-wsl2-firewall-inbound-rules.png]]
 
 If you missed this step or are not sure what you've chosen or if you are
 switching from WSL 1 to WSL 2 you can retrigger this dialog by deleting the
 inbound rules (admin rights needed) and restart VcXsrv. The inbound rules shown
-above can be found at @@html:<kbd>@@WIN@@html:</kbd>@@ Windows Defender Wall >
-Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc RET@@html:</kbd>@@).
+above can be found at @@html:<kbd>@@WIN@@html:</kbd>@@ Windows Defender Firewall
+> Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc RET@@html:</kbd>@@).
 
 *** WSL 2 Additional Firewall Configuration
 
@@ -77,18 +79,18 @@ caution. This option exists primarily for running test suites remotely.
 
 Therefore we want to restrict the access as much as possible.
 
-Unfortunately you can't modify the firewall rules if you have _*no admin rights*_.
+Unfortunately you can't modify the firewall rules if you have _no admin rights_.
 In that case you have to live with the security issue (not sure how severe it
 is) or use WSL 1 or use Emacs in the terminal.
 
-If you have _*admin rights*_ you can add an inbound firewall rule to restrict
+If you have _admin rights_ you can add an inbound firewall rule to restrict
 access as much as possible. As the IP used by WSL 2 is dynamic a powershell
 script is provided to create/update the rule.
 
 Make sure that you disable the existing inbound rules:
 
 1. Go to the inbound rule settings with @@html:<kbd>@@WIN@@html:</kbd>@@ Windows
-   Defender Wall > Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc
+   Defender Firewall > Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc
    RET@@html:</kbd>@@).
 2. Search for VcXsrv entries (there should be 2) and disable all.
 
