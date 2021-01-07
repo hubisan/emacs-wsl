@@ -55,10 +55,10 @@ You have to allow VcXsrv to communicate on:
 
 After allowing access the following inbound rules are added:
 
-- ~WSl 1~ [[
-  ./img/vcxsrv-wsl1-firewall-inbound-rules.png]]
-- ~WSL 2~ [[
-  ./img/vcxsrv-wsl2-firewall-inbound-rules.png]]
+- ~WSl 1~
+  [[./img/vcxsrv-wsl1-firewall-inbound-rules.png]]
+- ~WSL 2~
+  [[./img/vcxsrv-wsl2-firewall-inbound-rules.png]]
 
 If you missed this step or are not sure what you've chosen or if you are
 switching from WSL 1 to WSL 2 you can retrigger this dialog by deleting the
