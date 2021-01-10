@@ -80,11 +80,9 @@ and permits any host to modify the access control list. Use with extreme
 caution. This option exists primarily for running test suites remotely.
 #+END_QUOTE
 
-Therefore we want to restrict the access as much as possible.
-
-Unfortunately you can't modify the firewall rules if you have ~no admin rights~.
-In that case you have to live with the security issue (not sure how severe it
-is) or use WSL 1 or use Emacs in the terminal.
+Therefore we want to restrict the access as much as possible. Unfortunately you
+can't modify the firewall rules if you have ~no admin rights~. In that case you
+have to live with the security issue (not sure how severe it is).
 
 If you have ~admin rights~ you can add an inbound firewall rule to restrict
 access as much as possible. As the IP used by WSL 2 is dynamic a powershell
@@ -95,7 +93,7 @@ Make sure that you disable the existing inbound rules:
 1. Go to the inbound rule settings with @@html:<kbd>@@WIN@@html:</kbd>@@ Windows
    Defender Firewall > Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc
    RET@@html:</kbd>@@).
-2. Search for VcXsrv entries (there should be 2) and disable all.
+2. Search for VcXsrv entries (there should be two) and disable all found.
 
 **** TODO
 
