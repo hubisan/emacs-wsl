@@ -57,7 +57,7 @@ Make sure everything is up to date by running:
 * Install Emacs 27.1
 
 Run the following commands in Ubuntu 20.04 or download and use (double-click)
-the Batch Scripts from the ~install-emacs~ folder:
+the Batch Scripts from the ~install-emacs-batch-scripts~ folder:
 
 1. Install all dependencies (taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]):
    #+BEGIN_SRC shell
