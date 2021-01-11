@@ -1,14 +1,28 @@
-* Emacs-WSL
+* Emacs-WSL                                                        :noexport:
 
 This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL
-(Version 1 and 2) on Windows 10 using Ubuntu 20.04 LTS as Linux distribution
-(tested with Ubuntu 18.04 as well) and VcXsrv as X server to run Emacs in a
-graphical display.
+(Version 1 and 2) on Windows 10 using Ubuntu 20.04 LTS as Linux distribution and
+VcXsrv as X server to run Emacs in a graphical display.
 
 #+caption: Graphical Emacs in Windows 10 with WSL
 [[./img/emacs-wsl.png]]
 
-* TODO Contents
+* Contents                                                         :TOC_1_gh:
+- [[#preparation][Preparation]]
+- [[#enable-wsl-1-or-wsl-2][Enable WSL 1 or WSL 2]]
+- [[#install-ubuntu-2004][Install Ubuntu 20.04]]
+- [[#install-emacs-271][Install Emacs 27.1]]
+- [[#install-windows-x-server-vcxsrv][Install Windows X-Server VcXsrv]]
+- [[#run-emacs-in-terminal][Run Emacs in Terminal]]
+- [[#run-emacs-in-graphical-display][Run Emacs in Graphical Display]]
+- [[#optional-additions][Optional Additions]]
+- [[#faq][FAQ]]
+- [[#troubleshooting][Troubleshooting]]
+
+* Preparation
+
+Clone this repository with Git or download it to any place on your machine to be
+able use the scripts later on.
 
 * Enable WSL 1 or WSL 2
 
@@ -48,8 +62,8 @@ To install Ubuntu 20.04 open PowerShell and run:
   Add-AppxPackage .\ubuntu-2004.appx
 #+END_SRC
 
-After installation open Start @@html:<kbd>@@WIN@@html:</kbd>@@ and launch
-~Ubuntu 20.04 LTS~. After a while you have to enter a username and a
+After installation open Start @@html:<kbd>@@WIN@@html:</kbd>@@ and launch the
+~Ubuntu 20.04 LTS~ terminal. After a while you have to enter a username and a
 password. This user will be your default user for the distribution and is
 considered the Linux administrator with the ability to run sudo commands.
 
@@ -61,57 +75,65 @@ Make sure everything is up to date by running:
 
 * Install Emacs 27.1
 
-Run the following commands in Ubuntu 20.04 or download and use (double-click)
-the Batch Scripts from the ~install-emacs-batch-scripts~ folder:
+To install Emacs 27.1 in Ubuntu 20.04
+
+- use (double-click) the batch scripts (.bat) from the [[./install-emacs]] folder
+- or clone this repo in the Ubuntu terminal and run the shell scipts from the
+  [[./install-emacs]] folder
+- or run the following commands in the Ubuntu terminal:
+
 
 1. Install all dependencies (taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]):
-   #+BEGIN_SRC shell
-     sudo apt update
-     sudo apt install -y autoconf automake bsd-mailx dbus-x11 debhelper dpkg-dev \
-         libacl1-dev libasound2-dev libdbus-1-dev libgif-dev libgnutls28-dev libgpm-dev \
-         libgtk-3-dev libjansson-dev libjpeg-dev liblcms2-dev liblockfile-dev libm17n-dev \
-         libncurses5-dev liboss4-salsa2 libotf-dev libpng-dev librsvg2-dev \
-         libselinux1-dev libsystemd-dev libtiff-dev libxml2-dev libxpm-dev procps quilt \
-         sharutils texinfo zlib1g-dev gvfs language-pack-en-base libasound2 libaspell15 \
-         libasyncns0 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libbrotli1 \
-         libcairo-gobject2 libcairo2 libcanberra-gtk3-0 libcanberra-gtk3-module \
-         libcanberra0 libcroco3 libdatrie1 libdb5.3 libdrm2 libegl1 libenchant1c2a \
-         libepoxy0 libflac8 libfontconfig1 libfreetype6 libgbm1 libgdk-pixbuf2.0-0 \
-         libgif7 libgl1 libglvnd0 libglx0 libgpm2 libgraphite2-3 libgstreamer-gl1.0-0 \
-         libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 libgtk-3-0 libgudev-1.0-0 \
-         libharfbuzz-icu0 libharfbuzz0b libhyphen0 libice6 libicu66 libjansson4 \
-         libjavascriptcoregtk-4.0-18 libjbig0 libjpeg-turbo8 liblcms2-2 liblockfile1 \
-         libltdl7 libm17n-0 libnotify4 libnss-mdns libnss-myhostname libnss-systemd \
-         libogg0 liborc-0.4-0 libotf0 libpango-1.0-0 libpangocairo-1.0-0 \
-         libpangoft2-1.0-0 libpixman-1-0 libpng16-16 libpulse0 librsvg2-2 libsasl2-2 \
-         libsecret-1-0 libsm6 libsndfile1 libsoup2.4-1 libssl1.1 libstdc++6 libtdb1 \
-         libthai0 libtiff5 libvorbis0a libvorbisenc2 libvorbisfile3 libwayland-client0 \
-         libwayland-cursor0 libwayland-egl1 libwayland-server0 libwebp6 libwebpdemux2 \
-         libwoff1 libx11-6 libx11-xcb1 libxau6 libxcb-render0 libxcb-shm0 libxcb1 \
-         libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 libxext6 libxfixes3 libxi6 \
-         libxinerama1 libxkbcommon0 libxml2 libxpm4 libxrandr2 libxrender1 libxslt1.1 \
-         libyajl2
-   #+END_SRC
-   There will be a dialog about the mail server configuration, just select ~no
-   configuration~ to leave it as it is and confirm with OK.
+  #+BEGIN_SRC shell
+    sudo apt update
+    sudo apt install -y autoconf automake bsd-mailx dbus-x11 debhelper dpkg-dev \
+        libacl1-dev libasound2-dev libdbus-1-dev libgif-dev libgnutls28-dev libgpm-dev \
+        libgtk-3-dev libjansson-dev libjpeg-dev liblcms2-dev liblockfile-dev libm17n-dev \
+        libncurses5-dev liboss4-salsa2 libotf-dev libpng-dev librsvg2-dev \
+        libselinux1-dev libsystemd-dev libtiff-dev libxml2-dev libxpm-dev procps quilt \
+        sharutils texinfo zlib1g-dev gvfs language-pack-en-base libasound2 libaspell15 \
+        libasyncns0 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libbrotli1 \
+        libcairo-gobject2 libcairo2 libcanberra-gtk3-0 libcanberra-gtk3-module \
+        libcanberra0 libcroco3 libdatrie1 libdb5.3 libdrm2 libegl1 libenchant1c2a \
+        libepoxy0 libflac8 libfontconfig1 libfreetype6 libgbm1 libgdk-pixbuf2.0-0 \
+        libgif7 libgl1 libglvnd0 libglx0 libgpm2 libgraphite2-3 libgstreamer-gl1.0-0 \
+        libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 libgtk-3-0 libgudev-1.0-0 \
+        libharfbuzz-icu0 libharfbuzz0b libhyphen0 libice6 libicu66 libjansson4 \
+        libjavascriptcoregtk-4.0-18 libjbig0 libjpeg-turbo8 liblcms2-2 liblockfile1 \
+        libltdl7 libm17n-0 libnotify4 libnss-mdns libnss-myhostname libnss-systemd \
+        libogg0 liborc-0.4-0 libotf0 libpango-1.0-0 libpangocairo-1.0-0 \
+        libpangoft2-1.0-0 libpixman-1-0 libpng16-16 libpulse0 librsvg2-2 libsasl2-2 \
+        libsecret-1-0 libsm6 libsndfile1 libsoup2.4-1 libssl1.1 libstdc++6 libtdb1 \
+        libthai0 libtiff5 libvorbis0a libvorbisenc2 libvorbisfile3 libwayland-client0 \
+        libwayland-cursor0 libwayland-egl1 libwayland-server0 libwebp6 libwebpdemux2 \
+        libwoff1 libx11-6 libx11-xcb1 libxau6 libxcb-render0 libxcb-shm0 libxcb1 \
+        libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 libxext6 libxfixes3 libxi6 \
+        libxinerama1 libxkbcommon0 libxml2 libxpm4 libxrandr2 libxrender1 libxslt1.1 \
+        libyajl2
+  #+END_SRC
+  There will be a dialog about the mail server configuration, just select ~no
+  configuration~ to leave it as it is and confirm with OK.
+
+  If you are on ~Ubuntu 18.04~ use the dependencies from
+   [[./install-emacs/ubuntu-18.04-dependencies.sh]].
 
 2. Download Emacs:
-   #+BEGIN_SRC shell
-     cd ~
-     wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.1.tar.gz
-     tar -xzvf emacs-27.1.tar.gz
-   #+END_SRC
+  #+BEGIN_SRC shell
+    cd ~
+    wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.1.tar.gz
+    tar -xzvf emacs-27.1.tar.gz
+  #+END_SRC
 
 3. Configure and install Emacs:
-   #+BEGIN_SRC shell
-     cd ~/emacs-27.1
-     ./configure --with-cairo
-     make
-     sudo make install
-     rm ~/emacs-27.1.tar.gz
-   #+END_SRC
-   Keeps the directory where Emacs was cloned to in case any step fails (to
-   clean or reinstall) or to be able to reconfigure.
+  #+BEGIN_SRC shell
+    cd ~/emacs-27.1
+    ./configure --with-cairo
+    make
+    sudo make install
+    rm ~/emacs-27.1.tar.gz
+  #+END_SRC
+  Keeps the directory where Emacs was cloned to in case any step fails (to
+  clean or reinstall) or to be able to reconfigure.
 
 To try out if Emacs is working just run it directly in the terminal with ~emacs
 -nw~.
@@ -157,7 +179,7 @@ above can be found at @@html:<kbd>@@WIN@@html:</kbd>@@ Windows Defender Firewall
 
 *** WSL 2 Additional Firewall Configuration
 
-To make VcXsrv work with WSL 2 you have to disable access control. Disabling the
+To make VcXsrv work with ~WSL 2~ you have to disable access control. Disabling the
 user access control with the ~-ac~ flag has some [[https://www.xfree86.org/current/Xserver.1.html][security issues]]:
 
 #+BEGIN_QUOTE
@@ -181,107 +203,75 @@ Make sure that you disable the existing inbound rules:
    RET@@html:</kbd>@@).
 2. Search for VcXsrv entries (there should be two) and disable all found.
 
-**** TODO
+* Run Emacs in Terminal
 
-Then run the powershell script to create/update the firewall rule. If VcXsrv was
-running before the firewall rules was updated it has to be restarted.
+Run Emacs with ~emacs -nw~ in Ubuntu terminal.
+
+* TODO Run Emacs in Graphical Display
+
+To run Emacs in a graphical display you have to:
+
+- ~WSL 2 only~ Created/update the inbound firewall rule
+- Run VcXsrv
+- Run Emacs in Ubuntu terminal
+
+For convenience there are batch scripts (double-clickable) to:
+
+- WSL1:
+  1. Run VcXsrv
+  2. Run Emacs
+  3. Run VcXsrv (1.) and then Emacs (2.)
+
+- WSL2:
+  1. Create/update the inbound firewall rule (admin rights needed).
+  2. Run VcXsrv
+  3. Run Emacs
+  4. Firewall rule (1.) and VcXsrv (2.)
+  5. Firewall rule (1.), VcXsrv (2.) and Emacs (3.)
+
+** ~WSL 2 only~ Create/update the Inbound Firewall Rule
+
+As described in [[#wsl-2-additional-firewall-configuration][WSL 2 Additional Firewall Configuration]] we want to restrict the
+access by adding a firewall rule. Make sure you have disabled the existing
+VcXsrv firewall rules.
+
+To create or update the inbound firewall rule you can use the batch script
+[[./run-emacs/wsl2-firewall-rule.bat]] (double-click) which calls the PowerShell
+script or run the PowerShell [[./run-emacs/wsl2-firewall-rule.ps1]] script directly.
+If VcXsrv was running before the firewall rules was updated it has to be
+restarted.
 
 ** Run VcXsrv
 
-To run VcXsrv use the batch-script provided in the ~scripts~ folder (just
+To run VcXsrv use the batch script provided in the [[./run-emacs]] folder (just
 double-click it). If you haven't used the default installation path you have to
-adapt the script:
+adapt the script.
 
-*** TODO
-
-- ~WSL 1~ link
+- ~WSL 1~ [[./run-emacs/wsl1-vcxsrv.bat]]
   #+BEGIN_SRC bat
     start "" "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
   #+END_SRC
-- ~WSL 2~ link
+- ~WSL 2~ [[./run-emacs/wsl2-vcxsrv.bat]]
   #+BEGIN_SRC bat
     start "" "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl -ac
   #+END_SRC
   If you are using the additional firewall rule make sure to create/update the
   rule before launching VcXsrv.
 
-If VcXsrv is already running it will show an error message.
+If VcXsrv is already running it will show an error message. In that case stop
+VcXsrv to and run it again.
 
-* TODO Run Emacs in Graphical Display
+** Run Emacs
 
-* TODO Optional Additions
+*** WSL 1
 
-** TODO Use Windows Terminal
+Use
 
-Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
+*** WSL 2
 
-#+BEGIN_QUOTE
-The Windows Terminal is a modern, fast, efficient, powerful, and productive
-terminal application for users of command-line tools and shells like Command
-Prompt, PowerShell, and WSL.
-#+END_QUOTE
+* Optional Additions
 
-To make it open WSL by default:
-
-- Open the Windows Terminal.
-- Open the settings by clicking on the dropdown button in the tab bar and then
-  select settings (bound to @@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
-- Copy the GUID for WSL (example: {12345678-1234-1234-1234-1234567890AB}).
-- Set the default profile to the one copied from WSL:
-  #+BEGIN_SRC js
-    {
-        ...
-        "defaultProfile": "{12345678-1234-1234-1234-1234567890AB}",
-        ...
-  #+END_SRC
-
-To change the default path to =~=:
-
-- Go to the settings (@@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
-- Add a line in the WSL part at the end:
-  #+BEGIN_SRC js
-    {
-        ...
-        "source": "Windows.Terminal.Wsl",
-        "startingDirectory": "//wsl$/Ubuntu-18.04/home/<username>/"
-    },
-  #+END_SRC
-
-** TODO User
-
-Instead of using root user it's better to add a user and use that as default
-user.
-
-*** Add user
-
-#+BEGIN_SRC shell
-  sudo adduser <username>
-#+END_SRC
-
-*** Make it a sudo user
-
-Make that user be a sudo user:
-
-#+BEGIN_SRC shell
-  sudo usermod -a -G sudo <username>
-#+END_SRC
-
-*** Change default user
-
-Change the default user which is used when starting the WSL.
-
-Open ~cmd.exe~ and run:
-
-#+BEGIN_SRC shell
-  ubuntu config --default-user <username>
-#+END_SRC
-
-Restart WSL.
-
-You can change the default back to root by using ~root~ as username. To change
-to root inside WSL temporarily use ~sudo su -~.
-
-** TODO Ssh key
+** Ssh key
 
 Generate a new ED25519 SSH key pair:
 
@@ -300,11 +290,11 @@ To copy the generated ssh key into the clipboard use:
   clip.exe < ~/.ssh/id_ed25519.pub
 #+END_SRC
 
-** TODO Use en_US Language
+** Use en_US Language
 
 Bash on Ubuntu on Windows starts on the language defined in your Country or
-Region settings. If you want to change the default language to en_US you may
-need to follow these steps:
+Region settings (maybe this got changed, not 100 % sure). If you want to change
+the default language to en_US you may need to run the following commands:
 
 #+BEGIN_SRC shell
   sudo apt install -y language-pack-en language-pack-en-base manpages
@@ -312,7 +302,7 @@ need to follow these steps:
   sudo update-locale LANG=en_US.UTF8
 #+END_SRC
 
-** TODO Mount network drives
+** Mount network drives automatically
 
 To do so the fstab file needs to be configured.
 
@@ -325,8 +315,7 @@ make this work, so in this case ~sudo mkdir /mnt/h~ is needed beforehand):
 
 From now on that network drive is automatically mounted.
 
-
-** TODO Zsh
+** Zsh and oh-my-zsh
 
 If you want to use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://ohmyz.sh/][oh-my-zsh]]:
 
@@ -338,11 +327,10 @@ If you want to use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://
 
 Restart WSL.
 
-*** TODO
 In some scripts you need to change bash to zsh to be able to use it when
 emulating a terminal in Emacs.
 
-* TODO FAQ
+* FAQ
 
 ** Where is the root folder located?
 

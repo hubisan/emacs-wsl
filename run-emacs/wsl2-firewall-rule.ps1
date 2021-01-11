@@ -1,7 +1,6 @@
-# WSL2 - Add inbound fireall rule
+# WSL2 - Add inbound firewall rule
 
-# Started here and somehow found all I need:
-# https://stackoverflow.com/a/61110604/1365754
+# Started here and somehow found all I need: https://stackoverflow.com/a/61110604/1365754
 
 # If the current console is not elevated then pass the script to a new elevated powershell process.
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
