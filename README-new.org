@@ -18,7 +18,7 @@ Open PowerShell as Administrator and run:
   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 #+END_SRC
 
-For WSL 2 (see requirements) you have to enable another feature:
+For ~WSL 2~ (see [[https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-2---check-requirements-for-running-wsl-2][requirements]]) you have to enable another feature:
 
 #+BEGIN_SRC fundamental
   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
@@ -28,25 +28,30 @@ Restart the computer.
 
 Download and install the [[https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi][Linux kernel update package]].
 
-If you use WSL 2 you have to set it as default before intstalling Ubuntu:
+If you use ~WSL 2~ you have to set it as default before intstalling Ubuntu:
 
 #+BEGIN_SRC fundamental
   wsl --set-default-version 2
 #+END_SRC
+
+If you are not able to install WSL with this instructions here go have a look
+at the official Microsoft docs
+([[https://docs.microsoft.com/en-us/windows/wsl/install-win10][site]]) on how
+to install WSL.
 
 * Install Ubuntu 20.04
 
 To install Ubuntu 20.04 open PowerShell and run:
 
 #+BEGIN_SRC text
-  curl.exe -L -o ubuntu-1804.appx https://aka.ms/wsl-ubuntu-1804
-  Add-AppxPackage .\ubuntu-1804.appx
+  curl.exe -L -o ubuntu-2004.appx https://aka.ms/wslubuntu2004
+  Add-AppxPackage .\ubuntu-2004.appx
 #+END_SRC
 
-After installation open Start (@@html:<kbd>WIN</kbd>@@) and launch ~Ubuntu 20.04
-LTS~. After a while you have to enter a username and a password. This user will
-be your default user for the distribution and is considered the Linux
-administrator with the ability to run sudo commands.
+After installation open Start @@html:<kbd>@@WIN@@html:</kbd>@@ and launch
+~Ubuntu 20.04 LTS~. After a while you have to enter a username and a
+password. This user will be your default user for the distribution and is
+considered the Linux administrator with the ability to run sudo commands.
 
 Make sure everything is up to date by running:
 
@@ -61,6 +66,7 @@ the Batch Scripts from the ~install-emacs-batch-scripts~ folder:
 
 1. Install all dependencies (taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]):
    #+BEGIN_SRC shell
+     sudo apt update
      sudo apt install -y autoconf automake bsd-mailx dbus-x11 debhelper dpkg-dev \
          libacl1-dev libasound2-dev libdbus-1-dev libgif-dev libgnutls28-dev libgpm-dev \
          libgtk-3-dev libjansson-dev libjpeg-dev liblcms2-dev liblockfile-dev libm17n-dev \
@@ -86,6 +92,8 @@ the Batch Scripts from the ~install-emacs-batch-scripts~ folder:
          libxinerama1 libxkbcommon0 libxml2 libxpm4 libxrandr2 libxrender1 libxslt1.1 \
          libyajl2
    #+END_SRC
+   There will be a dialog about the mail server configuration, just select ~no
+   configuration~ to leave it as it is and confirm with OK.
 
 2. Download Emacs:
    #+BEGIN_SRC shell
