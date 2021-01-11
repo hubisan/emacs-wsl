@@ -216,7 +216,7 @@ To run Emacs in a graphical display you have to:
 
 1. ~WSL 2 only, optional~ Created/update the inbound firewall rule (admin rights needed)
 2. Run VcXsrv
-3. Run Emacs in Ubuntu terminal
+3. Run Emacs
 
 For convenience there are batch scripts (double-clickable) to:
 
