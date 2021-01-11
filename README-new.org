@@ -22,7 +22,7 @@ VcXsrv as X server to run Emacs in a graphical display.
 * Preparation
 
 Clone this repository with Git or download it to any place on your machine to be
-able use the scripts later on.
+able use the batch scripts (recommended) later on.
 
 * Enable WSL 1 or WSL 2
 
@@ -115,7 +115,10 @@ To install Emacs 27.1 in Ubuntu 20.04
   configuration~ to leave it as it is and confirm with OK.
 
   If you are on ~Ubuntu 18.04~ use the dependencies from
-   [[./install-emacs/ubuntu-18.04-dependencies.sh]].
+   [[./install-emacs/ubuntu-18.04-dependencies.sh]]. In that case you will also have
+   to modify the scripts (if you plan to use them) as the distribution is
+   hardcoded into them to make sure to use the right distribution even it is not
+   set as default yet.
 
 2. Download Emacs:
   #+BEGIN_SRC shell
@@ -217,17 +220,17 @@ To run Emacs in a graphical display you have to:
 
 For convenience there are batch scripts (double-clickable) to:
 
-- WSL1:
-  1. Run VcXsrv
-  2. Run Emacs
-  3. Run VcXsrv (1.) and then Emacs (2.)
+- ~WSL1~
+  1. Run VcXsrv [[./run-emacs/wsl1-vcxsrv.bat]]
+  2. Run Emacs [[./run-emacs/wsl1-emacs.bat]]
+  3. Run VcXsrv (1.) and then Emacs (2.) [[./run-emacs/wsl1-run-all.bat]]
 
-- WSL2:
-  1. Create/update the inbound firewall rule (admin rights needed).
-  2. Run VcXsrv
-  3. Run Emacs
-  4. Firewall rule (1.) and VcXsrv (2.)
-  5. Firewall rule (1.), VcXsrv (2.) and Emacs (3.)
+- ~WSL2~
+  1. Create/update the inbound firewall rule (admin rights needed). [[./run-emacs/wsl2-firewall-rule.bat]]
+  2. Run VcXsrv [[./run-emacs/wsl2-vcxsrv.bat]]
+  3. Run Emacs [[./run-emacs/wsl2-emacs.bat]]
+  4. Firewall rule (1.) and VcXsrv (2.) [[./run-emacs/wsl2-firewall-rule-vcxsrv.bat]]
+  5. Firewall rule (1.), VcXsrv (2.) and Emacs (3.) [[./run-emacs/wsl2-run-all.bat]]
 
 ** ~WSL 2 only~ Create/update the Inbound Firewall Rule
 
@@ -236,16 +239,14 @@ access by adding a firewall rule. Make sure you have disabled the existing
 VcXsrv firewall rules.
 
 To create or update the inbound firewall rule you can use the batch script
-[[./run-emacs/wsl2-firewall-rule.bat]] (double-click) which calls the PowerShell
-script or run the PowerShell [[./run-emacs/wsl2-firewall-rule.ps1]] script directly.
-If VcXsrv was running before the firewall rules was updated it has to be
-restarted.
+[[./run-emacs/wsl2-firewall-rule.bat]]. If VcXsrv was running before the firewall
+rules was updated it has to be restarted.
 
 ** Run VcXsrv
 
-To run VcXsrv use the batch script provided in the [[./run-emacs]] folder (just
-double-click it). If you haven't used the default installation path you have to
-adapt the script.
+To run VcXsrv use the batch script provided or run the following commands in cmd
+(if you haven't used the default installation path you have to adapt the
+script/command):
 
 - ~WSL 1~ [[./run-emacs/wsl1-vcxsrv.bat]]
   #+BEGIN_SRC bat
@@ -263,13 +264,32 @@ VcXsrv to and run it again.
 
 ** Run Emacs
 
-*** WSL 1
+To run Emacs you can launch Ubuntu terminal and run the following commands or
+use the batch script:
 
-Use
+- ~WSL1~ [[./run-emacs/wsl1-emacs.bat]]
+  #+BEGIN_SRC shell
+    export DISPLAY=:0.0
+    export LIBGL_ALWAYS_INDIRECT=1
+    setsid emacs
+  #+END_SRC
+- ~WSL2~ [[./run-emacs/wsl2-emacs.bat]]
+  #+BEGIN_SRC shell
+    export DISPLAY=$(ip route | awk '/^default/{print $3; exit}'):0.0
+    export LIBGL_ALWAYS_INDIRECT=1
+    setsid emacs
+  #+END_SRC
 
-*** WSL 2
+You can add the lines without ~setsid emacs~ to ~~/.bashrc~ and then just use
+~setsid emacs~ to launch Emacs in the background.
 
 * Optional Additions
+
+** Change keyboard layout
+
+If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is
+installed (~sudo apt install x11-xkb-utils~) and add for instance ~setxkbmap
+-layout us~ to ~~/.bashrc~ to use the US keyboard layout
 
 ** Ssh key
 
