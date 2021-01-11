@@ -240,7 +240,7 @@ VcXsrv firewall rules.
 
 To create or update the inbound firewall rule you can use the batch script
 [[./run-emacs/wsl2-firewall-rule.bat]]. If VcXsrv was running before the firewall
-rules was updated it has to be restarted.
+rule was updated it has to be restarted.
 
 ** Run VcXsrv
 
