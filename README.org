@@ -280,7 +280,7 @@ use the batch script:
     setsid emacs
   #+END_SRC
 
-You can add the lines without ~setsid emacs~ to ~\~/.bashrc~ and then just use
+You can add the lines without ~setsid emacs~ to =~/.bashrc= and then just use
 ~setsid emacs~ to launch Emacs in the background.
 
 * Optional Additions
@@ -289,7 +289,7 @@ You can add the lines without ~setsid emacs~ to ~\~/.bashrc~ and then just use
 
 If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is
 installed (~sudo apt install x11-xkb-utils~) and add for instance ~setxkbmap
--layout us~ to ~\~/.bashrc~ to use the US keyboard layout
+-layout us~ to =~/.bashrc= to use the US keyboard layout
 
 ** Generate SSH Key
 
