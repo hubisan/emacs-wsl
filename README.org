@@ -42,16 +42,15 @@ Restart the computer.
 
 Download and install the [[https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi][Linux kernel update package]].
 
-If you use ~WSL 2~ you have to set it as default before intstalling Ubuntu:
+If you want to use ~WSL 2~ you should set it as default before intstalling
+Ubuntu:
 
 #+BEGIN_SRC fundamental
   wsl --set-default-version 2
 #+END_SRC
 
-If you are not able to install WSL with this instructions here go have a look
-at the official Microsoft docs
-([[https://docs.microsoft.com/en-us/windows/wsl/install-win10][site]]) on how
-to install WSL.
+If you are not able to install WSL with this instructions go have a look at the
+official Microsoft docs ([[https://docs.microsoft.com/en-us/windows/wsl/install-win10][site]]) on how to install WSL.
 
 * Install Ubuntu 20.04
 
@@ -62,12 +61,13 @@ To install Ubuntu 20.04 open PowerShell and run:
   Add-AppxPackage .\ubuntu-2004.appx
 #+END_SRC
 
-After installation open Start @@html:<kbd>@@WIN@@html:</kbd>@@ and launch the
-~Ubuntu 20.04 LTS~ terminal. After a while you have to enter a username and a
-password. This user will be your default user for the distribution and is
-considered the Linux administrator with the ability to run sudo commands.
+After installation open Start (@@html:<kbd>@@WIN@@html:</kbd>@@) and launch the
+~Ubuntu 20.04 LTS~ terminal. After a short while you will be prompted to enter a
+username and a password. This user will be your default user for the
+distribution and is considered the Linux administrator with the ability to run
+sudo commands.
 
-Make sure everything is up to date by running:
+Finish the installation by making sure everything is up to date:
 
 #+BEGIN_SRC shell
   sudo apt update && sudo apt upgrade -y
@@ -75,13 +75,12 @@ Make sure everything is up to date by running:
 
 * Install Emacs 27.1
 
-To install Emacs 27.1 in Ubuntu 20.04
+To install Emacs 27.1 in Ubuntu 20.04 you can
 
-- use (double-click) the batch scripts (.bat) from the [[./install-emacs]] folder
+- use (double-click) the three batch scripts (.bat) from the [[./install-emacs]] folder
 - or clone this repo in the Ubuntu terminal and run the shell scipts from the
   [[./install-emacs]] folder
 - or run the following commands in the Ubuntu terminal:
-
 
 1. Install all dependencies (taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]):
   #+BEGIN_SRC shell
@@ -118,7 +117,7 @@ To install Emacs 27.1 in Ubuntu 20.04
    [[./install-emacs/ubuntu-18.04-dependencies.sh]]. In that case you will also have
    to modify the scripts (if you plan to use them) as the distribution is
    hardcoded into them to make sure to use the right distribution even it is not
-   set as default yet.
+   set as default.
 
 2. Download Emacs:
   #+BEGIN_SRC shell
@@ -197,9 +196,10 @@ have to live with the security issue (not sure how severe it is).
 
 If you have ~admin rights~ you can add an inbound firewall rule to restrict
 access as much as possible. As the IP used by WSL 2 is dynamic a powershell
-script is provided to create/update the rule.
+script is provided later on to create/update the rule.
 
-Make sure that you disable the existing inbound rules:
+If you want ot used the additional firewall rule make sure that you disable the
+existing inbound rules:
 
 1. Go to the inbound rule settings with @@html:<kbd>@@WIN@@html:</kbd>@@ Windows
    Defender Firewall > Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc
@@ -214,23 +214,23 @@ Run Emacs with ~emacs -nw~ in Ubuntu terminal.
 
 To run Emacs in a graphical display you have to:
 
-- ~WSL 2 only~ Created/update the inbound firewall rule
-- Run VcXsrv
-- Run Emacs in Ubuntu terminal
+1. ~WSL 2 only, optional~ Created/update the inbound firewall rule (admin rights needed)
+2. Run VcXsrv
+3. Run Emacs in Ubuntu terminal
 
 For convenience there are batch scripts (double-clickable) to:
 
 - ~WSL1~
   1. Run VcXsrv [[./run-emacs/wsl1-vcxsrv.bat]]
   2. Run Emacs [[./run-emacs/wsl1-emacs.bat]]
-  3. Run VcXsrv (1.) and then Emacs (2.) [[./run-emacs/wsl1-run-all.bat]]
+  3. Run VcXsrv and then Emacs [[./run-emacs/wsl1-run-all.bat]]
 
 - ~WSL2~
   1. Create/update the inbound firewall rule (admin rights needed). [[./run-emacs/wsl2-firewall-rule.bat]]
   2. Run VcXsrv [[./run-emacs/wsl2-vcxsrv.bat]]
   3. Run Emacs [[./run-emacs/wsl2-emacs.bat]]
-  4. Firewall rule (1.) and VcXsrv (2.) [[./run-emacs/wsl2-firewall-rule-vcxsrv.bat]]
-  5. Firewall rule (1.), VcXsrv (2.) and Emacs (3.) [[./run-emacs/wsl2-run-all.bat]]
+  4. Firewall rule and VcXsrv [[./run-emacs/wsl2-firewall-rule-vcxsrv.bat]]
+  5. Firewall rule, VcXsrv and Emacs [[./run-emacs/wsl2-run-all.bat]]
 
 ** ~WSL 2 only~ Create/update the Inbound Firewall Rule
 
@@ -260,7 +260,7 @@ script/command):
   rule before launching VcXsrv.
 
 If VcXsrv is already running it will show an error message. In that case stop
-VcXsrv to and run it again.
+VcXsrv if needed and run the script again.
 
 ** Run Emacs
 
@@ -280,7 +280,7 @@ use the batch script:
     setsid emacs
   #+END_SRC
 
-You can add the lines without ~setsid emacs~ to ~~/.bashrc~ and then just use
+You can add the lines without ~setsid emacs~ to ~\~/.bashrc~ and then just use
 ~setsid emacs~ to launch Emacs in the background.
 
 * Optional Additions
@@ -289,9 +289,9 @@ You can add the lines without ~setsid emacs~ to ~~/.bashrc~ and then just use
 
 If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is
 installed (~sudo apt install x11-xkb-utils~) and add for instance ~setxkbmap
--layout us~ to ~~/.bashrc~ to use the US keyboard layout
+-layout us~ to ~\~/.bashrc~ to use the US keyboard layout
 
-** Ssh key
+** Generate SSH Key
 
 Generate a new ED25519 SSH key pair:
 
@@ -322,7 +322,7 @@ the default language to en_US you may need to run the following commands:
   sudo update-locale LANG=en_US.UTF8
 #+END_SRC
 
-** Mount network drives automatically
+** Mount Network Drives Automatically
 
 To do so the fstab file needs to be configured.
 
@@ -388,5 +388,4 @@ Check out the Microsoft docs:
 
 ** The GUI is not loading/showing at all
 
-Check your firewall settings.
-
+Check your firewall settings (see [[#wsl-2-additional-firewall-configuration][WSL 2 Additional Firewall Configuration]]).
