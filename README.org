@@ -229,19 +229,20 @@ To run Emacs in a graphical display you have to:
 2. Run VcXsrv
 3. Run Emacs
 
-For convenience there are batch scripts (double-clickable) to:
+For convenience there are batch scripts (double-clickable) to (you can copy
+the run-emacs folder for WSL 1 or WSL 2 to wherever you want):
 
-- ~WSL1~
-  1. Run VcXsrv [[./run-emacs/wsl1-vcxsrv.bat]]
-  2. Run Emacs [[./run-emacs/wsl1-emacs.bat]]
-  3. Run VcXsrv and then Emacs [[./run-emacs/wsl1-run-all.bat]]
+- ~WSL 1~
+  1. Run VcXsrv and Emacs [[./run-emacs-wsl-1/wsl-1_0-run-all.bat]]
+  2. Run VcXsrv [[./run-emacs-wsl-1/wsl-1_1-vcxsrv.bat]]
+  3. Run Emacs [[./run-emacs-wsl-1/wsl-1_2-emacs.bat]]
 
-- ~WSL2~
-  1. Create/update the inbound firewall rule (admin rights needed). [[./run-emacs/wsl2-firewall-rule.bat]]
-  2. Run VcXsrv [[./run-emacs/wsl2-vcxsrv.bat]]
-  3. Run Emacs [[./run-emacs/wsl2-emacs.bat]]
-  4. Firewall rule and VcXsrv [[./run-emacs/wsl2-firewall-rule-vcxsrv.bat]]
-  5. Firewall rule, VcXsrv and Emacs [[./run-emacs/wsl2-run-all.bat]]
+- ~WSL 2~
+  1. Run all (Firewall rule, VcXsrv and Emacs) [[./run-emacs-wsl-2/wsl-2_0-run-all.bat]]
+  2. Run Firewall rule and VcXsrv [[./run-emacs-wsl-2/wsl-2_1-firewall-rule-vcxsrv.bat]]
+  3. Run Firewall rule (admin rights needed). [[./run-emacs-wsl-2/wsl-2_2-firewall-rule.bat]]
+  4. Run VcXsrv [[./run-emacs-wsl-2/wsl-2_3-vcxsrv.bat]]
+  5. Run Emacs [[./run-emacs-wsl-2/wsl-2_4-emacs.bat]]
 
 ** ~WSL 2 only~ Create/update the Inbound Firewall Rule
 
@@ -250,7 +251,7 @@ access by adding a firewall rule. Make sure you have disabled the existing
 VcXsrv firewall rules.
 
 To create or update the inbound firewall rule you can use the batch script
-[[./run-emacs/wsl2-firewall-rule.bat]]. If VcXsrv was running before the firewall
+[[./run-emacs-wsl-2/wsl-2_2-firewall-rule.bat]]. If VcXsrv was running before the firewall
 rule was updated it has to be restarted.
 
 ** Run VcXsrv
@@ -259,11 +260,11 @@ To run VcXsrv use the batch script provided or run the following commands in cmd
 (if you haven't used the default installation path you have to adapt the
 script/command):
 
-- ~WSL 1~ [[./run-emacs/wsl1-vcxsrv.bat]]
+- ~WSL 1~ [[./run-emacs-wsl-1/wsl-1_1-vcxsrv.bat]]
   #+BEGIN_SRC bat
     start "" "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl
   #+END_SRC
-- ~WSL 2~ [[./run-emacs/wsl2-vcxsrv.bat]]
+- ~WSL 2~ [[./run-emacs-wsl-2/wsl-2_3-vcxsrv.bat]]
   #+BEGIN_SRC bat
     start "" "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -multiwindow -clipboard -wgl -ac
   #+END_SRC
@@ -278,24 +279,43 @@ VcXsrv if needed and run the script again.
 To run Emacs you can launch Ubuntu terminal and run the following commands or
 use the batch script:
 
-- ~WSL1~ [[./run-emacs/wsl1-emacs.bat]]
+- ~WSL1~ [[./run-emacs-wsl-1/wsl-1_2-emacs.bat]]
   #+BEGIN_SRC shell
     export DISPLAY=:0.0
     export LIBGL_ALWAYS_INDIRECT=1
     setsid emacs
   #+END_SRC
-- ~WSL2~ [[./run-emacs/wsl2-emacs.bat]]
+- ~WSL2~ [[./run-emacs-wsl-2/wsl-2_4-emacs.bat]]
   #+BEGIN_SRC shell
     export DISPLAY=$(ip route | awk '/^default/{print $3; exit}'):0.0
     export LIBGL_ALWAYS_INDIRECT=1
     setsid emacs
   #+END_SRC
 
-You can add the lines without ~setsid emacs~ to =~/.bashrc= (or
-=~/.profile=) and then just use ~setsid emacs~ to launch Emacs in the
-background. If you do so the VcXsrv has to be running before launching the
-terminal else this will give an error when starting the terminal and in that
-case slow the startup down.
+You can add the lines without ~setsid emacs~ to =~/.bashrc= and then just use
+~setsid emacs~ to launch Emacs in the background. If you do so the VcXsrv has
+to be running before launching the terminal else this will give an error when
+starting the terminal and in that case slow the startup down.
+
+To not have to type this over and over add an alias in =~/.bashrc= and then
+run Emacs with ~ema~ (needs a restart):
+
+- ~WSL1~
+  #+BEGIN_SRC shell
+    alias ema='
+    export DISPLAY=:0.0
+    export LIBGL_ALWAYS_INDIRECT=1
+    setsid emacs
+    '
+  #+END_SRC
+- ~WSL2~
+  #+BEGIN_SRC shell
+    alias ema='
+    export DISPLAY=$(ip route | awk '/^default/{print $3; exit}'):0.0
+    export LIBGL_ALWAYS_INDIRECT=1
+    setsid emacs
+    '
+  #+END_SRC
 
 * Optional Additions
 
@@ -347,8 +367,9 @@ installed (~sudo apt install x11-xkb-utils~) and add for instance
   setxkbmap -layout us
 #+END_SRC
 
-to =~/.bashrc= (or =~/.profile=) to use the US keyboard layout. Or add it to
-the scripts used to run Emacs (~... && setxkbmap -layout us && setsid emacs~).
+to =~/.bashrc= or to the alias to use the US keyboard layout. Or add it to
+the scripts used to run Emacs (~... && setxkbmap -layout us && setsid
+emacs~).
 
 ** Generate SSH Key
 
