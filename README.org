@@ -82,13 +82,16 @@ set Ubuntu 20.04 as default. Open PowerShell and run:
 
 * Install Emacs 27.1
 
-To install Emacs 27.1 in Ubuntu 20.04 you can (check the commmands run below
-in any case beforehand):
+To install Emacs 27.1 in Ubuntu 20.04 you can 
 
 - use (double-click) the three batch scripts (.bat) from the [[./install-emacs]] folder
 - or clone this repo in the Ubuntu terminal and run the shell scripts from the
   [[./install-emacs]] folder
-- or run the following commands in the Ubuntu terminal:
+- or run the following commands in the Ubuntu terminal
+
+#+BEGIN_QUOTE
+Check out the commands run and especially the remarks below in any case.
+#+END_QUOTE
 
 1. Install all dependencies (taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]):
   #+BEGIN_SRC shell
@@ -209,8 +212,8 @@ If you have ~admin rights~ you can add an inbound firewall rule to restrict
 access as much as possible. As the IP used by WSL 2 is dynamic a powershell
 script is provided later on to create/update the rule.
 
-If you want ot used the additional firewall rule make sure that you disable the
-existing inbound rules:
+If you want to use the additional firewall rule make sure that you disable
+the existing inbound rules:
 
 1. Go to the inbound rule settings with @@html:<kbd>@@WIN@@html:</kbd>@@ Windows
    Defender Firewall > Advanced Settings (or @@html:<kbd>@@WIN-r wf.msc
@@ -293,8 +296,8 @@ use the batch script:
   #+END_SRC
 
 You can add the lines without ~setsid emacs~ to =~/.bashrc= and then just use
-~setsid emacs~ to launch Emacs in the background. If you do so the VcXsrv has
-to be running before launching the terminal else this will give an error when
+~setsid emacs~ to launch Emacs in the background. If you do so VcXsrv has to
+be running before launching the terminal else this will give an error when
 starting the terminal and in that case slow the startup down.
 
 To not have to type this over and over add an alias in =~/.bashrc= and then
@@ -320,8 +323,6 @@ run Emacs with ~ema~ (needs a restart):
 * Optional Additions
 
 ** Use Windows Terminal
-
-This step is optional but recommended.
 
 Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
 
