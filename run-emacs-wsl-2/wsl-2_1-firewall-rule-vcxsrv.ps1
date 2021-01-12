@@ -10,7 +10,7 @@ if ($vcxsrv) {
 }
 
 Write-Host "`nAdding the firewall rule"
-& .\wsl2-firewall-rule.ps1
+& .\wsl-2_2-firewall-rule.ps1
 
 Write-Host "`nStarting VcXsrv"
-& .\wsl2-vcxsrv.ps1
+& .\wsl-2_3-vcxsrv.ps1
