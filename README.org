@@ -82,10 +82,11 @@ set Ubuntu 20.04 as default. Open PowerShell and run:
 
 * Install Emacs 27.1
 
-To install Emacs 27.1 in Ubuntu 20.04 you can
+To install Emacs 27.1 in Ubuntu 20.04 you can (check the commmands run below
+in any case beforehand):
 
 - use (double-click) the three batch scripts (.bat) from the [[./install-emacs]] folder
-- or clone this repo in the Ubuntu terminal and run the shell scipts from the
+- or clone this repo in the Ubuntu terminal and run the shell scripts from the
   [[./install-emacs]] folder
 - or run the following commands in the Ubuntu terminal:
 
@@ -118,7 +119,8 @@ To install Emacs 27.1 in Ubuntu 20.04 you can
         libyajl2
   #+END_SRC
   There will be a dialog about the mail server configuration, just select ~no
-  configuration~ to leave it as it is and confirm with OK.
+  configuration~ to leave it as it is and confirm with OK (use TAB and RET to
+  get through this).
 
   If you are on ~Ubuntu 18.04~ use the dependencies from
    [[./install-emacs/ubuntu-18.04-dependencies.sh]]. In that case you will also have
@@ -126,7 +128,7 @@ To install Emacs 27.1 in Ubuntu 20.04 you can
    hardcoded into them to make sure to use the right distribution even it is not
    set as default.
 
-2. Download Emacs:
+2. Download and extract Emacs:
   #+BEGIN_SRC shell
     cd ~
     wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.1.tar.gz
@@ -134,6 +136,7 @@ To install Emacs 27.1 in Ubuntu 20.04 you can
   #+END_SRC
 
 3. Configure and install Emacs:
+  This Step will take a while and you are prompted to enter your password once.
   #+BEGIN_SRC shell
     cd ~/emacs-27.1
     ./configure --with-cairo
@@ -155,7 +158,8 @@ user interface (GUI). This guide is using [[https://sourceforge.net/projects/vcx
 ** Installation
 
 Download VcXsrv from [[https://sourceforge.net/projects/vcxsrv/]] and install it.
-Check out the next section about the firewall configuration before launching it.
+Check out the next section about the firewall configuration before launching
+it (app is called XLaunch) for a first time to add the firewall rules.
 
 ** Windows Defender Firewall Configuration
 
@@ -287,16 +291,64 @@ use the batch script:
     setsid emacs
   #+END_SRC
 
-You can add the lines without ~setsid emacs~ to =~/.bashrc= and then just use
-~setsid emacs~ to launch Emacs in the background.
+You can add the lines without ~setsid emacs~ to =~/.bashrc= (or
+=~/.profile=) and then just use ~setsid emacs~ to launch Emacs in the
+background. If you do so the VcXsrv has to be running before launching the
+terminal else this will give an error when starting the terminal and in that
+case slow the startup down.
 
 * Optional Additions
+
+** Use Windows Terminal
+
+This step is optional but recommended.
+
+Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
+
+#+BEGIN_QUOTE
+The Windows Terminal is a modern, fast, efficient, powerful, and productive
+terminal application for users of command-line tools and shells like Command
+Prompt, PowerShell, and WSL.
+#+END_QUOTE
+
+To make it open WSL by default:
+
+- Open the Windows Terminal.
+- Open the settings by clicking on the dropdown button in the tab bar and then
+  select settings (bound to @@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
+- Copy the GUID for WSL (example: {12345678-1234-1234-1234-1234567890AB}).
+- Set the default profile to the one copied from WSL:
+  #+BEGIN_SRC js
+    {
+        ...
+        "defaultProfile": "{12345678-1234-1234-1234-1234567890AB}",
+        ...
+  #+END_SRC
+
+To change the default path to =~=:
+
+- Go to the settings (@@html:<kbd>@@Ctrl-,@@html:</kbd>@@).
+- Add a line in the WSL part at the end (make sure to also add the ~,~ on the
+  previous line):
+  #+BEGIN_SRC js
+    {
+        ...
+        "source": "Windows.Terminal.Wsl",
+        "startingDirectory": "//wsl$/Ubuntu-20.04/home/<username>/"
+    },
+  #+END_SRC
 
 ** Change keyboard layout
 
 If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is
-installed (~sudo apt install x11-xkb-utils~) and add for instance ~setxkbmap
--layout us~ to =~/.bashrc= to use the US keyboard layout
+installed (~sudo apt install x11-xkb-utils~) and add for instance 
+
+#+BEGIN_SRC shell
+  setxkbmap -layout us
+#+END_SRC
+
+to =~/.bashrc= (or =~/.profile=) to use the US keyboard layout. Or add it to
+the scripts used to run Emacs (~... && setxkbmap -layout us && setsid emacs~).
 
 ** Generate SSH Key
 
