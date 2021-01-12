@@ -1,8 +1,4 @@
-#!/bin/bash
-
-# Install Emacs 27.1
-
-## Install dependencies (got those from all over the net and from the snap)
+# Dependencies for Ubuntu 18.04
 
 sudo apt install -y autoconf automake autotools-dev bsd-mailx build-essential \
     diffstat gnutls-dev imagemagick libasound2-dev libc6-dev libdatrie-dev \
@@ -20,16 +16,3 @@ sudo apt install -y autoconf automake autotools-dev bsd-mailx build-essential \
     libxcb-dri3-dev libxcb-glx0-dev libxcb-present-dev libxshmfence-dev \
     x11proto-composite-dev x11proto-core-dev x11proto-damage-dev \
     x11proto-fixes-dev
-
-## Download and install Emacs 27.1
-## Keeps the directory where emacs was cloned to in case any step fails (to
-## clean or reinstall) or to be able to reconfigure
-
-cd ~
-wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.1.tar.gz
-tar -xzvf emacs-27.1.tar.gz
-cd emacs-27.1
-./configure
-make
-sudo make install
-rm ~/emacs-27.1.tar.gz
