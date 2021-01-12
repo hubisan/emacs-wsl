@@ -1,0 +1,22 @@
+#+STARTUP: showall
+
+* Contributing
+
+* Bugs, Improvements and new Features
+
+Go to [[https://github.com/hubisan/emacs-wsl/issues][Issues]] and make a new issue.
+
+Make sure to:
+
+- Check that the issue has not already been reported (open and closed ones).
+- Check that the issue is not part of an active pull request.
+
+* Pull Requests
+
+Cool that you want to contribute your code :-)
+
+Remember to:
+
+- Include only one feature in a pull request.
+- Open an issue and mention your planned pull request.
+- Update the CHANGELOG.org

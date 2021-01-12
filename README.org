@@ -279,13 +279,13 @@ VcXsrv if needed and run the script again.
 To run Emacs you can launch Ubuntu terminal and run the following commands or
 use the batch script:
 
-- ~WSL1~ [[./run-emacs-wsl-1/wsl-1_2-emacs.bat]]
+- ~WSL 1~ [[./run-emacs-wsl-1/wsl-1_2-emacs.bat]]
   #+BEGIN_SRC shell
     export DISPLAY=:0.0
     export LIBGL_ALWAYS_INDIRECT=1
     setsid emacs
   #+END_SRC
-- ~WSL2~ [[./run-emacs-wsl-2/wsl-2_4-emacs.bat]]
+- ~WSL 2~ [[./run-emacs-wsl-2/wsl-2_4-emacs.bat]]
   #+BEGIN_SRC shell
     export DISPLAY=$(ip route | awk '/^default/{print $3; exit}'):0.0
     export LIBGL_ALWAYS_INDIRECT=1
@@ -300,7 +300,7 @@ starting the terminal and in that case slow the startup down.
 To not have to type this over and over add an alias in =~/.bashrc= and then
 run Emacs with ~ema~ (needs a restart):
 
-- ~WSL1~
+- ~WSL 1~
   #+BEGIN_SRC shell
     alias ema='
     export DISPLAY=:0.0
@@ -308,7 +308,7 @@ run Emacs with ~ema~ (needs a restart):
     setsid emacs
     '
   #+END_SRC
-- ~WSL2~
+- ~WSL 2~
   #+BEGIN_SRC shell
     alias ema='
     export DISPLAY=$(ip route | awk '/^default/{print $3; exit}'):0.0
