@@ -56,7 +56,7 @@ official Microsoft docs ([[https://docs.microsoft.com/en-us/windows/wsl/install-
 
 To install Ubuntu 20.04 open PowerShell and run:
 
-#+BEGIN_SRC text
+#+BEGIN_SRC fundamental
   curl.exe -L -o ubuntu-2004.appx https://aka.ms/wslubuntu2004
   Add-AppxPackage .\ubuntu-2004.appx
 #+END_SRC
@@ -67,10 +67,17 @@ username and a password. This user will be your default user for the
 distribution and is considered the Linux administrator with the ability to run
 sudo commands.
 
-Finish the installation by making sure everything is up to date:
+Make sure everything is up to date:
 
 #+BEGIN_SRC shell
   sudo apt update && sudo apt upgrade -y
+#+END_SRC
+
+If you already have been using another Linux distribution you might want to
+set Ubuntu 20.04 as default. Open PowerShell and run:
+
+#+BEGIN_SRC fundamental
+  wsl --set-default Ubuntu-20.04
 #+END_SRC
 
 * Install Emacs 27.1
