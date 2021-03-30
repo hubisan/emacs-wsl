@@ -11,7 +11,7 @@ VcXsrv as X server to run Emacs in a graphical display.
 - [[#preparation][Preparation]]
 - [[#enable-wsl-1-or-wsl-2][Enable WSL 1 or WSL 2]]
 - [[#install-ubuntu-2004][Install Ubuntu 20.04]]
-- [[#install-emacs-271][Install Emacs 27.1]]
+- [[#install-emacs-272][Install Emacs 27.2]]
 - [[#install-windows-x-server-vcxsrv][Install Windows X-Server VcXsrv]]
 - [[#run-emacs-in-terminal][Run Emacs in Terminal]]
 - [[#run-emacs-in-graphical-display][Run Emacs in Graphical Display]]
@@ -80,9 +80,9 @@ set Ubuntu 20.04 as default. Open PowerShell and run:
   wsl --set-default Ubuntu-20.04
 #+END_SRC
 
-* Install Emacs 27.1
+* Install Emacs 27.2
 
-To install Emacs 27.1 in Ubuntu 20.04 you can 
+To install Emacs 27.2 in Ubuntu 20.04 you can
 
 - use (double-click) the three batch scripts (.bat) from the [[./install-emacs]] folder
 - or clone this repo in the Ubuntu terminal and run the shell scripts from the
@@ -128,30 +128,38 @@ Check out the commands run and especially the remarks below in any case.
   If you are on ~Ubuntu 18.04~ use the dependencies from
    [[./install-emacs/ubuntu-18.04-dependencies.sh]]. In that case you will also have
    to modify the scripts (if you plan to use them) as the distribution is
-   hardcoded into them to make sure to use the right distribution even it is not
-   set as default.
+   hardcoded into them to make sure to use the right distribution even if it is
+   not set as default.
 
 2. Download and extract Emacs:
   #+BEGIN_SRC shell
     cd ~
-    wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.1.tar.gz
-    tar -xzvf emacs-27.1.tar.gz
+    wget https://ftp.gnu.org/pub/gnu/emacs/emacs-27.2.tar.gz
+    tar -xzvf emacs-27.2.tar.gz
   #+END_SRC
 
 3. Configure and install Emacs:
   This Step will take a while and you are prompted to enter your password once.
   #+BEGIN_SRC shell
-    cd ~/emacs-27.1
+    cd ~/emacs-27.2
     ./configure --with-cairo
     make
     sudo make install
-    rm ~/emacs-27.1.tar.gz
+    rm ~/emacs-27.2.tar.gz
   #+END_SRC
-  Keeps the directory where Emacs was cloned to in case any step fails (to
-  clean or reinstall) or to be able to reconfigure.
+  Keeps the directory where Emacs was cloned to be able to reinstall (if a
+   step fails), to reconfigure or to uninstall it.
 
 To try out if Emacs is working just run it directly in the terminal with ~emacs
 -nw~.
+
+** Update to a new Emacs version
+
+To update to a new Emacs version uninstall the current one by going to the
+folder you used for the installation (for instance =~/emacs-27.1=) and run ~make
+uninstall~.
+
+Then [[#install-emacs-272][install]] the new version.
 
 * Install Windows X-Server VcXsrv
 
