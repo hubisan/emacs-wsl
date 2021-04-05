@@ -156,8 +156,8 @@ To try out if Emacs is working just run it directly in the terminal with ~emacs
 ** Update to a new Emacs version
 
 To update to a new Emacs version uninstall the current one by going to the
-folder you used for the installation (for instance =~/emacs-27.1=) and run ~make
-uninstall~.
+folder you used for the installation (for instance =~/emacs-27.1=) and run ~sudo
+make uninstall~.
 
 Then [[#install-emacs-272][install]] the new version.
 
