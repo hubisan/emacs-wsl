@@ -56,6 +56,11 @@ official Microsoft docs ([[https://docs.microsoft.com/en-us/windows/wsl/install-
 
 To install Ubuntu 20.04 open PowerShell and run:
 
+#+BEGIN_QUOTE
+Use PowerShell Version 5 which is the preinstalled Version else the Appx module
+might not be available and you will get an error when running this command.
+#+END_QUOTE
+
 #+BEGIN_SRC fundamental
   curl.exe -L -o ubuntu-2004.appx https://aka.ms/wslubuntu2004
   Add-AppxPackage .\ubuntu-2004.appx
