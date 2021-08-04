@@ -318,19 +318,19 @@ run Emacs with ~ema~ (needs a restart):
 
 - ~WSL 1~
   #+BEGIN_SRC shell
-    alias ema='
+    alias ema="
     export DISPLAY=:0.0
     export LIBGL_ALWAYS_INDIRECT=1
     setsid emacs
-    '
+    "
   #+END_SRC
 - ~WSL 2~
   #+BEGIN_SRC shell
-    alias ema='
+    alias ema="
     export DISPLAY=$(ip route | awk '/^default/{print $3; exit}'):0.0
     export LIBGL_ALWAYS_INDIRECT=1
     setsid emacs
-    '
+    "
   #+END_SRC
 
 * Optional Additions
