@@ -335,6 +335,56 @@ run Emacs with ~ema~ (needs a restart):
 
 * Optional Additions
 
+** Preserve X11 Connections to Hyper-V
+The network connection between Windows and WSL2 breaks when your machine goes
+into standby or hibernate. Graphical Emacs & other GUI apps will terminate.
+
+Should you want to preserve your GUI Emacs sessions between sleep, there are
+three options:
+
+1. Use X2Go - virtual X11 server with Windows client
+
+   This is the most preferred option
+
+   a) Fix SSH host keys
+
+      #+begin_src bash
+      sudo apt-get remove --purge openssh-server
+      sudo apt-get install openssh-server
+      sudo service ssh --full-restart
+      #+end_src
+
+   b) Install X2Go on your Linux distribution
+
+      #+begin_src bash
+      apt install x2goserver
+      #+end_src
+
+   c) [[code.x2go.org/releases/X2GoClient_latest_mswin32-setup.exe][Download]] and install the client for Windows.
+
+   d) Configure the
+
+       Host: localhost
+       Login: <your user>
+       Session type: Published Applications
+
+   e) After each WSL/Windows restart
+
+      Launch ssh in Linux (if not started yet): sudo service ssh start
+      Launch “X2Go Client” on Windows ad connect to the server with user/password
+      Now you can launch X11 apps via the tray icon (see X2Go Published Applications)
+
+   Source: [[https://derkoe.dev/blog/development-environment-in-wsl2/][Development Environment in WSL2]]
+
+2. Forward X11 unix socket from WSL2 via WSL1 to X410/Vcxsrv/etc. running on Windows
+
+   [[http://emacsredux.com/blog/2020/09/23/using-emacs-on-windows-with-wsl2/?ht-comment-id=688089][Using Emacs on Windows with WSL2 | Emacs Redux]]
+   [[https://github.com/microsoft/WSL/issues/4619#issuecomment-678652118][microsoft/WSL#4619 {WSL 2} WSL 2 cannot access windows service via localhost:...]]
+
+3. WSL Daemon - Stable X11 connection for WSL2
+
+   [[https://github.com/nbdd0121/wsld][GitHub - nbdd0121/wsld: WSL Daemon - Stable X11 connection and time synchroni...]]
+
 ** Use Windows Terminal
 
 Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
@@ -375,7 +425,7 @@ To change the default path to =~=:
 ** Change keyboard layout
 
 If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is
-installed (~sudo apt install x11-xkb-utils~) and add for instance 
+installed (~sudo apt install x11-xkb-utils~) and add for instance
 
 #+BEGIN_SRC shell
   setxkbmap -layout us
