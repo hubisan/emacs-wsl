@@ -13,7 +13,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Import-Module -Name 'NetSecurity'
 
 $rulename = 'WSL 2 Firewall Unlock'
-$programname = 'C:\program files\vcxsrv\vcxsrv.exe'
+$programname = '${Env:programfiles}\vcxsrv\vcxsrv.exe'
 $localport = 6000
 
 # Get the remote ip.
