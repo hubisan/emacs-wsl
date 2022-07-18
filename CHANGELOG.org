@@ -7,6 +7,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+*** [[https://github.com/hubisan/emacs-wsl/compare/v1.1.4...v1.2.0][1.2.0]] - 2022-07-18
+
+- =CHANGED= Adapted instructions to use Emacs version 28.1 instead of 27.2.
+- =CHANGED= Using native compilation flag. Just remove it if you don't want it.
+  It works very well on my setup (WSL 1 and Ubuntu 20.04).
+- =ADDED= New dependencies from the snap including those needed for native
+  compilation.
+- =REMOVED= The batch scripts to install Emacs. Better do it in the terminal
+  as there might be some packages missing or other errors.
+- =ADDED= Instructions to use the latest snapshot of Emacs.
+- =ADDED= Remark about WSLg when using Windows 11.
+- =CHANGED= Made the VcXsrv section a child of the run Emacs section.
+
 *** [[https://github.com/hubisan/emacs-wsl/compare/v1.1.3...v1.1.4][1.1.4]] - 2021-09-20
 
 **** Added
