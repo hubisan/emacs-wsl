@@ -128,7 +128,7 @@ To install Emacs 28.1 in Ubuntu 20.04 follow those steps:
     tar -xzvf emacs-28.1.tar.gz
   #+END_SRC
 
-3. Configure and install Emacs:
+3. Configure and install Emacs:\\ 
    This Step will take a while and you might be prompted to enter your password
    once. If you don't want to use ~native compilation~ just remove the
    compilation flag in the following instructions:
