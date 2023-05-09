@@ -115,7 +115,7 @@ To install Emacs 28.1 in Ubuntu 20.04 follow those steps:
         libwoff1 libx11-6 libx11-xcb1 libxau6 libxcb-render0 libxcb-shm0 libxcb1 \
         libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 libxext6 libxfixes3 libxi6 \
         libxinerama1 libxkbcommon0 libxml2 libxpm4 libxrandr2 libxrender1 libxslt1.1 \
-        libyajl2 libwebp-dev
+        libyajl2 libwebp-dev libwebkit2gtk-4.0-dev
   #+END_SRC
   There might be a dialog about the mail server configuration, just select ~no
   configuration~ to leave it as it is and confirm with OK (use TAB and RET to
