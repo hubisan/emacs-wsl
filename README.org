@@ -1,10 +1,13 @@
 * Emacs-WSL                                                        :noexport:
 
-This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL
-(Version 1 and 2) on Windows 10 using Ubuntu 20.04 LTS as Linux distribution and
-VcXsrv as X server to run Emacs in a graphical display.
+This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL2
+using Ubuntu as Linux distribution.
 
-#+caption: Graphical Emacs in Windows 10 with WSL
+#+BEGIN_QUOTE
+I removed the old detailled instructions on how to install WSL1 as with WSL2 a link to the documentation is good enough as it is easy to install.
+#+END_QUOTE
+
+#+caption: Graphical Emacs in Windows 10 with WSL2
 [[./img/emacs-wsl.png]]
 
 * Contents                                                         :TOC_1_gh:
@@ -17,11 +20,6 @@ VcXsrv as X server to run Emacs in a graphical display.
 - [[#optional-additions][Optional Additions]]
 - [[#faq][FAQ]]
 - [[#troubleshooting][Troubleshooting]]
-
-* Preparation
-
-Clone this repository with Git or download it to any place on your machine to be
-able use the batch scripts (recommended) later on.
 
 * Enable WSL 1 or WSL 2
 
