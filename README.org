@@ -1,3 +1,4 @@
+#+OPTIONS: \n:t
 * Emacs-WSL                                                        :noexport:
 
 This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL2
