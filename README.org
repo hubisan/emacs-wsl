@@ -10,7 +10,6 @@ using Ubuntu as Linux distribution.
 I've removed the detailed instructions on WSL 1 installation. For WSL 2, a link to the documentation is sufficient, as it's straightforward to install. If you're still using WSL 1, please refer to the older [[https://github.com/hubisan/emacs-wsl/tree/v1.2.0][version]] of this documentation.
 #+END_QUOTE
 
-
 * Contents                                                         :TOC_1_gh:
 - [[#install-ubuntu][Install Ubuntu]]
 - [[#install-emacs-29][Install Emacs 29]]
@@ -27,7 +26,7 @@ Go to [[https://learn.microsoft.com/en-us/windows/wsl/install][Install WSL | Mic
 
 To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
-1. Install all dependencies (mostly taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]):
+1. Install all dependencies (mostly taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]]): 
 
   #+BEGIN_SRC shell
     sudo apt update
@@ -67,11 +66,9 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
       mailutils procps quilt sharutils texinfo zlib1g-dev
   #+END_SRC
 
-  There might be a dialog about the mail server configuration, just select ~no
-  configuration~ to leave it as it is and confirm with OK (use TAB and RET to
-  get through this).
+  There might be a dialog about the mail server configuration, just select ~no configuration~ to leave it as it is and confirm with OK (use TAB and RET to get through this).
 
-2. Clone the latest Emacs 29 version into =~/emacs=. Change the directory if you want to clone it somewhere else:
+2. Clone the latest Emacs 29 version into =~/emacs=. Change the directory if you want to clone it somewhere else: 
 
   #+BEGIN_SRC shell
     cd ~
@@ -94,24 +91,22 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
    - ~--with-pgtk~ Use GTK to support window systems other than X. If you want to use Wayland instead of X11.
 
-#+BEGIN_SRC shell
-  cd ~/emacs
-  export CC="gcc-10" CXX="gcc-10"
-  ./autogen.sh
-  # Remove --with-pgtk if you want to use X
-  ./configure --with-native-compilation --with-mailutils --with-json --with-tree-sitter --with-xwidgets
-  make -j$(nproc)
-  sudo make -j$(nproc) install
-#+END_SRC
+   #+BEGIN_SRC shell
+     cd ~/emacs
+     export CC="gcc-10" CXX="gcc-10"
+     ./autogen.sh
+     # Remove --with-pgtk if you want to use X
+     ./configure --with-native-compilation --with-mailutils --with-json --with-tree-sitter --with-xwidgets
+     make -j$(nproc)
+     sudo make -j$(nproc) install
+   #+END_SRC
 
-Keep the directory where Emacs was cloned to be able to reinstall (if a step
-fails), to reconfigure or to uninstall it.
-
-To check if Emacs is working, simply run it directly in the terminal using ~emacs -nw~.
-
+   Keep the directory where Emacs was cloned to be able to reinstall (if a step fails), to reconfigure or to uninstall it.
+   
+   To check if Emacs is working, simply run it directly in the terminal using ~emacs -nw~.
 ** Update to a new Emacs version
 
-To update to a new Emacs version, uninstall the current one by navigating to the installation folder (~/emacs) and executing ~sudo make uninstall~. Then install the new version.
+To update to a new Emacs version, uninstall the current one by navigating to the installation folder (~~/emacs~) and executing ~sudo make uninstall~. Then install the new version.
 
 ** Use latest Snapshot
 
@@ -125,8 +120,7 @@ To use the latest snapshot you can clone the master branch:
 
 WSL 2 now supports ([[https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps][Run Linux GUI apps with WSL | Microsoft Learn]]) running Linux GUI applications (X11 and Wayland).
 
-To run Emacs in graphical display just open the Ubuntu terminal and run ~emacs~. 
-To make it detach the process from the controlling terminal use ~setsid emacs~.
+To run Emacs in graphical display just open the Ubuntu terminal and run ~emacs~. To make it detach the process from the controlling terminal use ~setsid emacs~.
 
 * Run Emacs in Terminal
 
@@ -139,9 +133,7 @@ Run Emacs with ~emacs -nw~ in Ubuntu terminal.
 Install [[https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab][Windows Terminal]] from Microsoft from the Microsoft Store.
 
 #+BEGIN_QUOTE
-The Windows Terminal is a modern, fast, efficient, powerful, and productive
-terminal application for users of command-line tools and shells like Command
-Prompt, PowerShell, and WSL.
+The Windows Terminal is a modern, fast, efficient, powerful, and productive terminal application for users of command-line tools and shells like Command Prompt, PowerShell, and WSL.
 #+END_QUOTE
 
 ** Change keyboard layout
@@ -150,16 +142,13 @@ Prompt, PowerShell, and WSL.
 This only works if you use X11. If using wayland just switch the window keyboard layout for the Emacs application window.
 #+END_QUOTE
 
-If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is
-installed (~sudo apt install x11-xkb-utils~) and add, for instance
+If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is installed (~sudo apt install x11-xkb-utils~) and add, for instance
 
 #+BEGIN_SRC shell
   setxkbmap -layout us
 #+END_SRC
 
-to =~/.bashrc= or to the alias to use the US keyboard layout. Or add it to
-the scripts used to run Emacs (~... && setxkbmap -layout us && setsid
-emacs~).
+to =~/.bashrc= or to the alias to use the US keyboard layout. Or add it to the scripts used to run Emacs (~... && setxkbmap -layout us && setsid emacs~).
 
 ** Generate SSH Key
 
@@ -182,9 +171,7 @@ To copy the generated ssh key into the clipboard use:
 
 ** Use en_US Language
 
-Bash on Ubuntu on Windows starts on the language defined in your Country or
-Region settings (maybe this got changed, not sure). If you want to change
-the default language to en_US you may need to run the following commands:
+Bash on Ubuntu on Windows starts on the language defined in your Country or Region settings (maybe this got changed, not sure). If you want to change the default language to en_US you may need to run the following commands:
 
 #+BEGIN_SRC shell
   sudo apt install -y language-pack-en language-pack-en-base manpages
@@ -204,8 +191,7 @@ If you want to use [[https://en.wikipedia.org/wiki/Z_shell][zsh]] and [[https://
 
 Restart WSL.
 
-In some scripts you need to change bash to zsh to be able to use it when
-emulating a terminal in Emacs.
+In some scripts you need to change bash to zsh to be able to use it when emulating a terminal in Emacs.
 
 ** Shrink Title Bar If Using Wayland
 
@@ -217,11 +203,9 @@ Just use this [[file:wayland-css/gtk.css][css]] and save it as =~/.config/gtk-3.
 [2023-12-14 Thu] Not sure if this is still relevant.
 #+END_QUOTE
 
-The network connection between Windows and WSL2 breaks when your machine goes
-into standby or hibernate. Graphical Emacs & other GUI apps will terminate.
+The network connection between Windows and WSL2 breaks when your machine goes into standby or hibernate. Graphical Emacs & other GUI apps will terminate.
 
-Should you want to preserve your GUI Emacs sessions between sleep, there are
-three options:
+Should you want to preserve your GUI Emacs sessions between sleep, there are three options:
 
 1. Use X2Go - virtual X11 server with Windows client
 
@@ -251,9 +235,7 @@ three options:
 
    e) After each WSL/Windows restart
 
-      Launch ssh in Linux (if not started yet): sudo service ssh start
-      Launch “X2Go Client” on Windows ad connect to the server with user/password
-      Now you can launch X11 apps via the tray icon (see X2Go Published Applications)
+      Launch ssh in Linux (if not started yet): sudo service ssh start Launch “X2Go Client” on Windows ad connect to the server with user/password Now you can launch X11 apps via the tray icon (see X2Go Published Applications)
 
    Source: [[https://derkoe.dev/blog/development-environment-in-wsl2/][Development Environment in WSL2]]
 
@@ -274,14 +256,8 @@ The root is accessible as ~\\wsl$~ in file explorer.
 
 ** How to access Linux files from Windows?
 
-Run ~explorer.exe .~ in WSL to open the Windows File Explorer at the current
-location. The path will start with ~\\wsl$~ unless it is a mounted drive. In the
-File Explorer the files and folders can be copied, moved and edited as usual
-(see this blog [[https://devblogs.microsoft.com/commandline/whats-new-for-wsl-in-windows-10-version-1903/][post]]).
+Run ~explorer.exe .~ in WSL to open the Windows File Explorer at the current location. The path will start with ~\\wsl$~ unless it is a mounted drive. In the File Explorer the files and folders can be copied, moved and edited as usual (see this blog [[https://devblogs.microsoft.com/commandline/whats-new-for-wsl-in-windows-10-version-1903/][post]]).
 
 ** How start WSL from File Explorer in the current folder?
 
-To start WSL from Windows File Explorer just type ~wsl~ into the location input
-box or hold down ~Shift~ while right-clicking and select ~Open Linux shell here~
-from the context menu. If it's a network drive it has to be mounted else this
-will not work.
+To start WSL from Windows File Explorer just type ~wsl~ into the location input box or hold down ~Shift~ while right-clicking and select ~Open Linux shell here~ from the context menu. If it's a network drive it has to be mounted else this will not work.
