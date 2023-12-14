@@ -26,10 +26,8 @@ Go to [[https://learn.microsoft.com/en-us/windows/wsl/install][Install WSL | Mic
 
 To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
-1. Install all dependencies (mostly taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]])
-   #+BEGIN_EXPORT html
-   <br><br>
-   #+END_EXPORT
+1. Install all dependencies (mostly taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]])\\
+     \\
    #+BEGIN_SRC shell
      sudo apt update
      sudo apt install -y autoconf automake bsd-mailx build-essential \
@@ -74,16 +72,12 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
    Change the directory if you want to clone it somewhere else.
 
-   #+BEGIN_EXPORT html
-   <br><br>
-   #+END_EXPORT
-
    #+BEGIN_SRC shell
      cd ~
      git clone --depth 1 --branch emacs-29 git://git.sv.gnu.org/emacs.git
    #+END_SRC
 
-3. Configure and install Emacs
+3. Configure and install Emacs\\
    
    This step will take some time, and you might be prompted to enter your password once.
 
@@ -99,19 +93,19 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
    - ~--with-pgtk~ Use GTK to support window systems other than X. If you want to use Wayland instead of X11.
 
-     #+BEGIN_SRC shell
-         cd ~/emacs
-         export CC="gcc-10" CXX="gcc-10"
-         ./autogen.sh
-         # Remove --with-pgtk if you want to use X
-         ./configure --with-native-compilation --with-mailutils --with-json --with-tree-sitter --with-xwidgets
-         make -j$(nproc)
-         sudo make -j$(nproc) install
-     #+END_SRC
+   #+BEGIN_SRC shell
+       cd ~/emacs
+       export CC="gcc-10" CXX="gcc-10"
+       ./autogen.sh
+       # Remove --with-pgtk if you want to use X
+       ./configure --with-native-compilation --with-mailutils --with-json --with-tree-sitter --with-xwidgets
+       make -j$(nproc)
+       sudo make -j$(nproc) install
+   #+END_SRC
 
-     Keep the directory where Emacs was cloned to be able to reinstall (if a step fails), to reconfigure or to uninstall it.
-     
-     To check if Emacs is working, simply run it directly in the terminal using ~emacs -nw~.
+   Keep the directory where Emacs was cloned to be able to reinstall (if a step fails), to reconfigure or to uninstall it.
+   
+   To check if Emacs is working, simply run it directly in the terminal using ~emacs -nw~.
 
 ** Update to a new Emacs version
 
