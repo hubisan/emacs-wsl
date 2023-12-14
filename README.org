@@ -27,7 +27,7 @@ Go to [[https://learn.microsoft.com/en-us/windows/wsl/install][Install WSL | Mic
 To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
 1. Install all dependencies (mostly taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]])
-   @@html:<br>@@
+   @@html:<br><br>@@
    #+BEGIN_SRC shell
      sudo apt update
      sudo apt install -y autoconf automake bsd-mailx build-essential \
@@ -68,10 +68,10 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
    There might be a dialog about the mail server configuration, just select ~no configuration~ to leave it as it is and confirm with OK (use TAB and RET to get through this).
 
-2. Clone the latest Emacs 29 version into =~/emacs=
-   @@html: @@
+2. Clone the latest Emacs 29 version into =~/emacs=\\
+
    Change the directory if you want to clone it somewhere else.
-   
+   @@html:<p></p>@@
    #+BEGIN_SRC shell
      cd ~
      git clone --depth 1 --branch emacs-29 git://git.sv.gnu.org/emacs.git
