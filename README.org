@@ -92,7 +92,6 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
    Other compilation options you might want to enable:
 
    - ~--with-pgtk~ Use GTK to support window systems other than X. If you want to use Wayland instead of X11.
-
       
    #+BEGIN_SRC shell
        cd ~/emacs
