@@ -97,7 +97,6 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
        cd ~/emacs
        export CC="gcc-10" CXX="gcc-10"
        ./autogen.sh
-       # Remove --with-pgtk if you want to use X
        ./configure --with-native-compilation --with-mailutils --with-json --with-tree-sitter --with-xwidgets
        make -j$(nproc)
        sudo make -j$(nproc) install
