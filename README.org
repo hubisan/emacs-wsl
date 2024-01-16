@@ -66,7 +66,7 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
        mailutils procps quilt sharutils texinfo zlib1g-dev
    #+END_SRC
 
-   There might be a dialog about the mail server configuration, just select ~no configuration~ to leave it as it is and confirm with OK (use TAB and RET to get through this).
+   There might be a dialog about the mail server configuration, just select ~no configuration~.
 
 2. Clone the latest Emacs 29 version into =~/emacs=\\
 
