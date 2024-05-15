@@ -108,7 +108,7 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
 ** Update to a new Emacs version
 
-To update to a new Emacs version, uninstall the current one by navigating to the installation folder (=~/emacs=) and executing ~sudo make uninstall~. Then install the new version.
+To update to a new Emacs version, uninstall the current one by navigating to the installation folder (=~/emacs=) and executing ~sudo make uninstall~. Then pull and install the new version.
 
 ** Use latest Snapshot
 
@@ -141,7 +141,7 @@ The Windows Terminal is a modern, fast, efficient, powerful, and productive term
 ** Change keyboard layout
 
 #+BEGIN_QUOTE
-This only works if you use X11. If using wayland just switch the window keyboard layout for the Emacs application window.
+This only works if you use X11. If using wayland just switch the window keyboard layout for the Emacs application window like you do for any other application in Windows.
 #+END_QUOTE
 
 If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is installed (~sudo apt install x11-xkb-utils~) and add, for instance
@@ -150,7 +150,7 @@ If you want to change the keyboard layout used make sure ~x11-xkb-utils~ is inst
   setxkbmap -layout us
 #+END_SRC
 
-to =~/.bashrc= or to the alias to use the US keyboard layout. Or add it to the scripts used to run Emacs (~... && setxkbmap -layout us && setsid emacs~).
+to =~/.bashrc= or to an alias. 
 
 ** Generate SSH Key
 
@@ -169,6 +169,24 @@ To copy the generated ssh key into the clipboard use:
 
 #+BEGIN_SRC shell
   clip.exe < ~/.ssh/id_ed25519.pub
+#+END_SRC
+
+** SSH-agent with ssh-ident
+
+~ssh-ident~ can be used as a simple way to utilize the SSH-agent.
+
+~ssh-ident~ starts the SSH agent for a specific identity on demand (once you actually need them) and sets a customizable lifetime for that identity. Another approach would be to launch the SSH agent during WSL startup. However, this prompts for a password every time, even if it's not needed.
+
+Install ~ssh-ident~ following the instructions provided in the [[https://github.com/ccontavalli/ssh-ident][documentation]].
+
+The following configuration is necessary to enable ssh-ident to work seamlessly with Magit:
+
+#+BEGIN_SRC emacs-lisp
+  ;; Integrate with ssh-ident to ask for ssh password:
+  (add-to-list 'magit-process-password-prompt-regexps
+               "^\\(Enter \\)?[Pp]assphrase for [^ ]*: ?$")
+  (add-to-list 'magit-process-password-prompt-regexps
+               "^Bad passphrase, try again for [^ ]*: ?$")
 #+END_SRC
 
 ** Use en_US Language
