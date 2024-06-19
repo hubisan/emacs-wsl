@@ -83,11 +83,10 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
    Optional features in used (feel free to remove any that you don't need):
 
-   - ~--with-native-compilation~ Compile with tree-sitter.
-   - ~--with-mailutils~ Causes Emacs to rely on GNU Mailutils to retrieve email. It is recommended, and is the default if GNU Mailutils is installed. 
-   - ~--with-json~ Compile with native JSON support. I think this is the default, if libjansson is installed, not sure though.
-   - ~--with-tree-sitter~ Compile with tree-sitter. Is probably also the default, if tree-sitter is installed.
-   - ~--with-xwidgets~ Enable use of xwidgets in Emacs buffers (requires gtk3 or macOS Cocoa)
+   - ~--with-native-compilation~ Compile with Emacs Lisp native compiler support.
+   - ~--with-json~ Compile with native JSON support. Is probably the default, when libjansson is installed.
+   - ~--with-tree-sitter~ Compile with tree-sitter. Is probably the default, when tree-sitter is installed.
+   - ~--with-xwidgets~ Enable use of xwidgets in Emacs buffers (requires gtk3 or macOS Cocoa).
 
    Other compilation options you might want to enable:
 
@@ -97,14 +96,14 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
        cd ~/emacs
        export CC="gcc-10" CXX="gcc-10"
        ./autogen.sh
-       ./configure --with-native-compilation --with-mailutils --with-json --with-tree-sitter --with-xwidgets
+       ./configure --with-native-compilation --with-json --with-tree-sitter --with-xwidgets
        make -j$(nproc)
        sudo make -j$(nproc) install
    #+END_SRC
 
-   Keep the directory where Emacs was cloned to be able to reinstall (if a step fails), to reconfigure or to uninstall it.
-   
-   To check if Emacs is working, simply run it directly in the terminal using ~emacs -nw~.
+   Retain the directory where Emacs was cloned for reinstallation (if a step fails), reconfiguration or uninstallation.
+
+   To check if Emacs is working, simply run it directly in the terminal using ~emacs -nw -q~.
 
 ** Update to a new Emacs version
 
