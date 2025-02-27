@@ -4,6 +4,15 @@
 
 All notable changes to this project will be documented in this file.
 
+*** [[https://github.com/hubisan/emacs-wsl/compare/v1.3.0...v1.4.0][1.4.0]] - 2025-02-27
+
+- =CHANGED= Adapted instructions to use Emacs version 30 instead of 29.
+- =ADDED= Added some dependencies from the snap for version 30. Some dependencies are probably not needed anymore, but no idea how to find this out.
+- =REMOVED= Remove json dependencies as json is natively supported now. Also removed the remark for json compilation flag as not needed anymore.
+- =REMOVED= Remark about native compilation flag. It is on by default now.
+- =CHANGED= Changed to https from git. Sometimes firewalls block git.
+- =REMOVED= Removed chapter 'Preserve X11 Connections to Hyper-V' this is quite old and if it is still relevant would probably have to be done somehow else.
+
 *** [[https://github.com/hubisan/emacs-wsl/compare/v1.2.0...v1.3.0][1.3.0]] - 2023-12-13
 
 - =REMOVED= Chapters for WSL1. WSL2 is very easy to install and a link to the documentation is all there is needed.

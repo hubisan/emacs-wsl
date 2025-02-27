@@ -1,3 +1,4 @@
+#+STARTUP: showall
 * Emacs-WSL                                                        :noexport:
 
 This guide shows you how to run Emacs with the Windows Subsystem for Linux WSL2
@@ -12,7 +13,7 @@ I've removed the detailed instructions on WSL 1 installation. For WSL 2, a link 
 
 * Contents                                                         :TOC_1_gh:
 - [[#install-ubuntu][Install Ubuntu]]
-- [[#install-emacs-29][Install Emacs 29]]
+- [[#install-emacs-30][Install Emacs 30]]
 - [[#run-emacs-in-a-graphical-display][Run Emacs in a Graphical Display]]
 - [[#run-emacs-in-terminal][Run Emacs in Terminal]]
 - [[#optional-additions][Optional Additions]]
@@ -22,30 +23,30 @@ I've removed the detailed instructions on WSL 1 installation. For WSL 2, a link 
 
 Go to [[https://learn.microsoft.com/en-us/windows/wsl/install][Install WSL | Microsoft Learn]] and follow the instructions to install WSL 2 with Ubuntu.
 
-* Install Emacs 29
+* Install Emacs 30
 
-To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
+To install the latest Emacs 30 version in Ubuntu 22.04 follow those steps. For other Ubuntu Version some dependencies have other versions and need to be adapted:
 
 1. Install all dependencies (mostly taken from the [[https://github.com/alexmurray/emacs-snap/blob/master/snapcraft.yaml][snap]])\\
    
    #+BEGIN_SRC shell
      sudo apt update
-     sudo apt install -y autoconf automake bsd-mailx build-essential \
-       dbus-x11 debhelper dpkg-dev emacs-bin-common emacs-common g++-10 gawk \
-       gcc-10 git gvfs ibus-gtk3 language-pack-en-base libacl1-dev libasound2 \
+     sudo apt install -y autoconf automake autopoint bsd-mailx libtool build-essential \
+       dbus-x11 debhelper dpkg-dev emacs-bin-common emacs-common g++-12 gawk \
+       gcc-12 git gvfs ibus-gtk3 language-pack-en-base libacl1-dev libasound2 \
        libasound2-dev libaspell15 libasyncns0 libatk1.0-0 libatk-bridge2.0-0 \
        libatspi2.0-0 libbrotli1 libc6 libc6 libc6-dev libc6-dev libcairo2 \
        libcairo2-dev libcairo-gobject2 libcanberra0 libcanberra-gtk3-0 \
        libcanberra-gtk3-module libdatrie1 libdb5.3 libdbus-1-3 libdbus-1-dev \
        libdrm2 libegl1 libenchant-2-dev libepoxy0 libflac8 libfontconfig1 \
        libfontconfig1-dev libfreetype6 libfreetype6-dev libgbm1 libgccjit0 \
-       libgccjit-10-dev libgcc-s1 libgdk-pixbuf2.0-0 libgif7 libgif-dev \
+       libgccjit-12-dev libgcc-s1 libgdk-pixbuf2.0-0 libgif7 libgif-dev \
        libgl1 libglib2.0-0 libglvnd0 libglx0 libgmp10 libgnutls28-dev \
        libgnutls30 libgpm2 libgpm2 libgpm-dev libgraphite2-3 \
        libgstreamer1.0-0 libgstreamer-gl1.0-0 libgstreamer-plugins-base1.0-0 \
        libgtk-3-0 libgtk-3-dev libgudev-1.0-0 libharfbuzz0b libharfbuzz0b \
        libharfbuzz-icu0 libhyphen0 libibus-1.0-5 libice6 libicu70 libisl23 \
-       libjansson4 libjansson-dev libjbig0 libjpeg8-dev libjpeg-dev \
+       libjbig0 libjpeg8-dev libjpeg-dev \
        libjpeg-turbo8 liblcms2-2 liblcms2-dev liblockfile1 liblockfile-dev \
        libltdl7 libm17n-0 libm17n-dev libmpc3 libmpfr6 libncurses5-dev \
        libnotify4 libnss-mdns libnss-myhostname libnss-sss libnss-systemd \
@@ -63,18 +64,23 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
        libxdmcp6 libxext6 libxfixes3 libxfixes-dev libxi6 libxi-dev \
        libxinerama1 libxkbcommon0 libxml2 libxml2-dev libxpm4 libxpm-dev \
        libxrandr2 libxrender1 libxrender-dev libxslt1.1 libxt-dev libyajl2 \
-       mailutils procps quilt sharutils texinfo zlib1g-dev
+       mailutils procps quilt sharutils texinfo zlib1g-dev libattr1 libblkid1 \
+       libbsd0 libdevmapper1.02.1 libenchant-2-2 libexpat1 libffi8 libgd3 \
+       libglib2.0-bin libhogweed6 libharfbuzz-dev
    #+END_SRC
 
    There might be a dialog about the mail server configuration, just select ~no configuration~.
 
-2. Clone the latest Emacs 29 version into =~/emacs=\\
+2. Clone the latest Emacs 30 version into =~/emacs=\\
 
    Change the directory if you want to clone it somewhere else.
 
    #+BEGIN_SRC shell
      cd ~
-     git clone --depth 1 --branch emacs-29 git://git.sv.gnu.org/emacs.git
+     git clone --depth 1 --branch emacs-30 https://git.savannah.gnu.org/git/emacs.git
+     # This might be slow over https, you can try this, but might be blocked
+     # by a firewal:
+     # git clone --depth 1 --branch emacs-30 git://git.sv.gnu.org/emacs.git
    #+END_SRC
 
 3. Configure and install Emacs\\
@@ -83,10 +89,9 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
 
    Optional features in used (feel free to remove any that you don't need):
 
-   - ~--with-native-compilation~ Compile with Emacs Lisp native compiler support.
-   - ~--with-json~ Compile with native JSON support. Is probably the default, when libjansson is installed.
-   - ~--with-tree-sitter~ Compile with tree-sitter. Is probably the default, when tree-sitter is installed.
-   - ~--with-xwidgets~ Enable use of xwidgets in Emacs buffers (requires gtk3 or macOS Cocoa).
+   - ~--with-mailutils~ Causes Emacs to rely on GNU Mailutils to retrieve email. It is recommended, and is the default if GNU Mailutils is installed. 
+   - ~--with-tree-sitter~ Compile with tree-sitter. Is probably also the default, if tree-sitter is installed.
+   - ~--with-xwidgets~ Enable use of xwidgets in Emacs buffers (requires gtk3 or macOS Cocoa)
 
    Other compilation options you might want to enable:
 
@@ -94,9 +99,9 @@ To install the latest Emacs 29 version in Ubuntu 22.04 follow those steps:
       
    #+BEGIN_SRC shell
        cd ~/emacs
-       export CC="gcc-10" CXX="gcc-10"
+       export CC="gcc-12" CXX="gcc-12"
        ./autogen.sh
-       ./configure --with-native-compilation --with-json --with-tree-sitter --with-xwidgets
+       ./configure --with-mailutils --with-tree-sitter --with-xwidgets
        make -j$(nproc)
        sudo make -j$(nproc) install
    #+END_SRC
@@ -114,7 +119,7 @@ To update to a new Emacs version, uninstall the current one by navigating to the
 To use the latest snapshot you can clone the master branch:
 
 #+BEGIN_SRC shell
-  git clone --depth 1 git://git.sv.gnu.org/emacs.git
+  git clone --depth 1 https://git.savannah.gnu.org/git/emacs.git
 #+END_SRC
 
 * Run Emacs in a Graphical Display
@@ -215,57 +220,6 @@ In some scripts you need to change bash to zsh to be able to use it when emulati
 ** Shrink Title Bar If Using Wayland
 
 Just use this [[file:wayland-css/gtk.css][css]] and save it as =~/.config/gtk-3.0/gtk.css=.
-
-** Preserve X11 Connections to Hyper-V
-
-#+BEGIN_QUOTE
-[2023-12-14 Thu] Not sure if this is still relevant.
-#+END_QUOTE
-
-The network connection between Windows and WSL2 breaks when your machine goes into standby or hibernate. Graphical Emacs & other GUI apps will terminate.
-
-Should you want to preserve your GUI Emacs sessions between sleep, there are three options:
-
-1. Use X2Go - virtual X11 server with Windows client
-
-   This is the most preferred option
-
-   a) Fix SSH host keys
-
-      #+begin_src bash
-      sudo apt-get remove --purge openssh-server
-      sudo apt-get install openssh-server
-      sudo service ssh --full-restart
-      #+end_src
-
-   b) Install X2Go on your Linux distribution
-
-      #+begin_src bash
-      apt install x2goserver
-      #+end_src
-
-   c) [[code.x2go.org/releases/X2GoClient_latest_mswin32-setup.exe][Download]] and install the client for Windows.
-
-   d) Configure the
-
-       Host: localhost
-       Login: <your user>
-       Session type: Published Applications
-
-   e) After each WSL/Windows restart
-
-      Launch ssh in Linux (if not started yet): sudo service ssh start Launch “X2Go Client” on Windows ad connect to the server with user/password Now you can launch X11 apps via the tray icon (see X2Go Published Applications)
-
-   Source: [[https://derkoe.dev/blog/development-environment-in-wsl2/][Development Environment in WSL2]]
-
-2. Forward X11 unix socket from WSL2 via WSL1 to X410/Vcxsrv/etc. running on Windows
-
-   [[http://emacsredux.com/blog/2020/09/23/using-emacs-on-windows-with-wsl2/?ht-comment-id=688089][Using Emacs on Windows with WSL2 | Emacs Redux]]
-   [[https://github.com/microsoft/WSL/issues/4619#issuecomment-678652118][microsoft/WSL#4619 {WSL 2} WSL 2 cannot access windows service via localhost:...]]
-
-3. WSL Daemon - Stable X11 connection for WSL2
-
-   [[https://github.com/nbdd0121/wsld][GitHub - nbdd0121/wsld: WSL Daemon - Stable X11 connection and time synchroni...]]
 
 * FAQ
 
