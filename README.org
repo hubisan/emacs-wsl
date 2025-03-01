@@ -87,24 +87,26 @@ To install the latest Emacs 30 version in Ubuntu 22.04 follow those steps. For o
    
    This step will take some time, and you might be prompted to enter your password once.
 
-   Optional features in used (feel free to remove any that you don't need):
+   Optional packages used (feel free to remove any that you don't need): 
 
-   - ~--with-mailutils~ Causes Emacs to rely on GNU Mailutils to retrieve email. It is recommended, and is the default if GNU Mailutils is installed. 
    - ~--with-tree-sitter~ Compile with tree-sitter. Is probably also the default, if tree-sitter is installed.
-   - ~--with-xwidgets~ Enable use of xwidgets in Emacs buffers (requires gtk3 or macOS Cocoa)
 
-   Other compilation options you might want to enable:
+   Many packages like sqlite3 or modules are now (30.1) enabled by default. To get a list of available features use ~.configure --help~.
 
-   - ~--with-pgtk~ Use GTK to support window systems other than X. If you want to use Wayland instead of X11.
-      
+   Other features you might want to enable:
+
+   - ~--with-pgtk~ Use GTK to support window systems other than X. If you want to use *Wayland* instead of X11.
+
    #+BEGIN_SRC shell
-       cd ~/emacs
-       export CC="gcc-12" CXX="gcc-12"
-       ./autogen.sh
-       ./configure --with-mailutils --with-tree-sitter --with-xwidgets
-       make -j$(nproc)
-       sudo make -j$(nproc) install
+     cd ~/emacs
+     export CC="gcc-12" CXX="gcc-12"
+     ./autogen.sh
+     ./configure --with-tree-sitter
+     make -j$(nproc)
+     sudo make -j$(nproc) install
    #+END_SRC
+
+   ~export CC="gcc-12" CXX="gcc-12"~ is added to make sure version 12 is used, else the default would be used and this might be an older version.
 
    Retain the directory where Emacs was cloned for reinstallation (if a step fails), reconfiguration or uninstallation.
 
