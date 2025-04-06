@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 *** Unreleased (in Master)
 - =REMOVED= Removed configured packages: --with-mailutils as it is the default, --with-xwidgets as most people will never use this, 
 - =ADDED= Clarification about configured packages and using gcc-12.
+- ~CHANGED~ Improved the section =Update to a new Emacs version=.
 
 *** [[https://github.com/hubisan/emacs-wsl/compare/v1.3.0...v1.4.0][1.4.0]] - 2025-02-27
 

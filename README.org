@@ -114,7 +114,18 @@ To install the latest Emacs 30 version in Ubuntu 22.04 follow those steps. For o
 
 ** Update to a new Emacs version
 
-To update to a new Emacs version, uninstall the current one by navigating to the installation folder (=~/emacs=) and executing ~sudo make uninstall~. Then pull and install the new version.
+If you want to change to update Emacs using the same branch as used when installing:
+
+- Navigate to the installation folder.
+- Pull the changes with ~git pull --depth=1~
+- Then run ~make -j$(nproc)~ and ~sudo make -j$(nproc) install~.
+
+If you want to change to another branch:
+
+- Navigate to the installation folder (it is =~/emacs= if you followed the instructions from here).
+- Execute ~sudo make uninstall~.
+- Remove the folder.
+- Start with the installation according to the manual again.
 
 ** Use latest Snapshot
 
